@@ -2,645 +2,714 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SLLOT888 — Purple Game Center</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLLOT888</title>
 
 <style>
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
+  user-select:none;
 }
 
 :root{
-  --purple:#7c3aed;
-  --purple2:#a855f7;
-  --purple3:#c084fc;
-  --dark:#090611;
-  --panel:#150d24;
-  --panel2:#211234;
-  --gold:#ffd166;
-  --white:#fff;
+  --bg:#10051f;
+  --panel:#1c0b32;
+  --panel2:#281044;
+  --purple:#8b35ff;
+  --purple2:#c66aff;
+  --pink:#ff45bd;
+  --gold:#ffd75a;
+  --text:#fff;
+  --muted:#bba8d2;
 }
 
 body{
   min-height:100vh;
-  font-family:Arial,"Noto Sans Thai",sans-serif;
-  color:white;
   background:
-    radial-gradient(circle at 50% -10%,#5b21b6 0%,transparent 35%),
-    radial-gradient(circle at 10% 80%,#3b0764 0%,transparent 30%),
-    linear-gradient(135deg,#07030d,#12051f 50%,#07030d);
+    radial-gradient(circle at 50% -10%,#512080 0%,transparent 38%),
+    radial-gradient(circle at 10% 80%,#260b43 0%,transparent 30%),
+    var(--bg);
+  color:white;
+  font-family:Arial,"Segoe UI",sans-serif;
   overflow-x:hidden;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.25;
-  background-image:
-    radial-gradient(circle,#fff 1px,transparent 1px);
-  background-size:90px 90px;
-  animation:stars 20s linear infinite;
-}
+/* =========================
+   HEADER
+========================= */
 
-@keyframes stars{
-  from{transform:translateY(0)}
-  to{transform:translateY(90px)}
-}
-
-button{
-  font:inherit;
-}
-
-.app{
-  width:min(1400px,94%);
-  margin:auto;
-  padding:22px 0 50px;
-}
-
-/* HEADER */
-
-.header{
-  height:75px;
-  padding:12px 18px;
+header{
+  height:62px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px;
-  background:rgba(20,10,34,.88);
-  border:1px solid rgba(192,132,252,.28);
-  border-radius:20px;
-  backdrop-filter:blur(15px);
-  box-shadow:0 0 35px rgba(124,58,237,.2);
+  padding:0 22px;
+  background:rgba(13,4,26,.92);
+  border-bottom:1px solid rgba(177,87,255,.3);
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(12px);
 }
 
 .logo{
-  font-size:30px;
+  font-size:25px;
   font-weight:1000;
-  letter-spacing:3px;
-  color:white;
-  text-shadow:
-    0 0 8px #a855f7,
-    0 0 25px #7c3aed;
-}
-
-.logo span{
-  color:#c084fc;
-}
-
-.nav{
-  display:flex;
-  gap:8px;
-}
-
-.nav button{
-  border:1px solid #49315e;
-  background:#21132f;
-  color:#ddd;
-  padding:10px 15px;
-  border-radius:12px;
-  cursor:pointer;
-}
-
-.nav button:hover{
-  background:#7c3aed;
-  color:white;
+  letter-spacing:2px;
+  background:linear-gradient(90deg,#fff,#c568ff,#8d35ff);
+  -webkit-background-clip:text;
+  color:transparent;
+  text-shadow:0 0 25px #a13dff;
 }
 
 .balance{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  background:#0c0713;
-  padding:10px 15px;
-  border-radius:13px;
-  border:1px solid #6d28d9;
+  background:#211033;
+  border:1px solid #7131a7;
+  border-radius:20px;
+  padding:8px 16px;
+  font-weight:800;
 }
 
-.coin{
-  font-size:21px;
+.balance span{
+  color:var(--gold);
 }
 
-/* HERO */
+/* =========================
+   LOBBY
+========================= */
+
+#lobby{
+  max-width:1200px;
+  margin:auto;
+  padding:30px 20px 60px;
+}
 
 .hero{
-  position:relative;
-  margin-top:22px;
-  min-height:270px;
-  overflow:hidden;
-  border-radius:27px;
-  padding:35px;
-  display:flex;
-  align-items:center;
-  background:
-    radial-gradient(circle at 80% 40%,rgba(168,85,247,.5),transparent 30%),
-    linear-gradient(120deg,#170b28,#32115c,#14081f);
-  border:1px solid rgba(192,132,252,.3);
-  box-shadow:inset 0 0 60px rgba(124,58,237,.15);
-}
-
-.hero:after{
-  content:"✦  ✧  ✦  ✧  ✦";
-  position:absolute;
-  right:5%;
-  top:15%;
-  font-size:80px;
-  letter-spacing:25px;
-  color:#c084fc;
-  opacity:.13;
-}
-
-.heroText{
-  position:relative;
-  z-index:2;
-  max-width:680px;
-}
-
-.hero small{
-  color:#c084fc;
-  font-weight:bold;
-  letter-spacing:3px;
+  text-align:center;
+  margin-bottom:25px;
 }
 
 .hero h1{
-  margin-top:8px;
-  font-size:clamp(38px,6vw,70px);
-  line-height:.95;
+  font-size:42px;
   font-weight:1000;
 }
 
-.hero h1 span{
-  color:#c084fc;
-}
-
 .hero p{
-  margin-top:18px;
-  color:#d8cbe5;
-  font-size:17px;
-  line-height:1.6;
+  color:var(--muted);
+  margin-top:8px;
 }
-
-/* SECTION */
-
-.sectionTitle{
-  margin:35px 5px 17px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.sectionTitle h2{
-  font-size:25px;
-}
-
-.sectionTitle span{
-  color:#a78bfa;
-  font-size:13px;
-}
-
-/* GAME CARDS */
 
 .games{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:15px;
+  gap:14px;
 }
 
-.card{
-  position:relative;
-  min-height:300px;
-  overflow:hidden;
-  border-radius:22px;
+.game-card{
+  min-height:210px;
+  padding:16px;
+  border-radius:18px;
   background:
-    linear-gradient(160deg,#261238,#100817);
-  border:1px solid #4c2870;
+    linear-gradient(145deg,rgba(105,35,160,.8),rgba(25,8,43,.95));
+  border:1px solid rgba(187,91,255,.35);
+  box-shadow:0 12px 35px rgba(0,0,0,.35);
   cursor:pointer;
-  transition:.35s;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-  border-color:#c084fc;
-  box-shadow:
-    0 15px 45px rgba(124,58,237,.35),
-    inset 0 0 30px rgba(168,85,247,.12);
-}
-
-.cardArt{
-  height:190px;
+  transition:.25s;
   display:flex;
-  align-items:center;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.game-card:hover{
+  transform:translateY(-6px);
+  border-color:#c56cff;
+  box-shadow:0 15px 45px rgba(151,48,255,.35);
+}
+
+.game-icon{
+  height:115px;
+  display:flex;
   justify-content:center;
-  font-size:90px;
-  position:relative;
-  background:
-    radial-gradient(circle,rgba(192,132,252,.28),transparent 50%),
-    linear-gradient(180deg,#32145a,#13091d);
+  align-items:center;
+  font-size:75px;
+  filter:drop-shadow(0 0 15px rgba(213,122,255,.55));
 }
 
-.cardArt:after{
-  content:"";
-  position:absolute;
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.1);
-  box-shadow:0 0 35px rgba(168,85,247,.5);
+.game-card h2{
+  font-size:18px;
 }
 
-.cardInfo{
-  padding:15px;
-}
-
-.cardInfo h3{
-  font-size:19px;
-}
-
-.cardInfo p{
-  margin-top:6px;
+.game-card p{
   font-size:12px;
-  color:#aa9ab8;
+  color:#bcaaca;
+  margin-top:4px;
 }
 
-.play{
-  margin-top:12px;
-  width:100%;
-  border:0;
-  padding:11px;
-  border-radius:11px;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-  background:linear-gradient(90deg,#6d28d9,#a855f7);
-  box-shadow:0 0 18px rgba(168,85,247,.25);
-}
+/* =========================
+   GAME PAGE
+========================= */
 
-/* GAME SCREEN */
-
-.gameScreen{
+#gamePage{
   display:none;
+  width:100%;
+  padding:12px;
 }
 
-.gameScreen.active{
-  display:block;
-  animation:screenIn .35s ease;
+.game-wrap{
+  width:min(950px,100%);
+  margin:auto;
 }
 
-@keyframes screenIn{
-  from{
-    opacity:0;
-    transform:translateY(15px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-.gameTop{
-  margin-top:22px;
+.topbar{
+  height:48px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
+  gap:8px;
+  margin-bottom:8px;
 }
 
 .back{
-  background:#241331;
+  border:1px solid #66318c;
+  background:#21102f;
   color:white;
-  border:1px solid #573875;
-  padding:10px 16px;
-  border-radius:12px;
+  padding:8px 13px;
+  border-radius:9px;
   cursor:pointer;
 }
 
-.gameTitle{
-  font-size:25px;
-  font-weight:bold;
+.game-title{
+  font-size:21px;
+  font-weight:1000;
 }
 
-/* SLOT AREA */
-
-.gameArea{
-  margin-top:18px;
-  padding:20px;
-  background:
-    radial-gradient(circle at center,#321451,#12081b 65%);
-  border:1px solid #593276;
-  border-radius:25px;
-  box-shadow:0 0 50px rgba(124,58,237,.18);
+.game-title small{
+  display:block;
+  font-size:10px;
+  color:#b89bcf;
+  font-weight:500;
+  text-align:center;
 }
+
+/* HUD */
 
 .hud{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:15px;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:7px;
+  margin-bottom:8px;
 }
 
-.hudBox{
-  min-width:110px;
-  text-align:center;
-  background:#0c0712;
-  border:1px solid #42245c;
-  padding:9px 14px;
-  border-radius:12px;
+.hud-box{
+  background:linear-gradient(145deg,#29113e,#180a28);
+  border:1px solid #542375;
+  border-radius:10px;
+  padding:7px 10px;
+  min-height:47px;
 }
 
-.hudBox small{
-  color:#9d8ba8;
-  display:block;
+.hud-label{
+  color:#aa91bc;
   font-size:10px;
 }
 
-.hudBox strong{
-  color:#fff;
+.hud-value{
+  font-size:16px;
+  font-weight:1000;
+  margin-top:2px;
 }
 
-/* BOARD */
+.free-value{
+  color:#69f8ff;
+  text-shadow:0 0 12px #00d9ff;
+}
+
+.auto-value{
+  color:#d26bff;
+  text-shadow:0 0 12px #ad2fff;
+}
+
+/* =========================
+   BOARD
+========================= */
+
+.board-area{
+  padding:9px;
+  border-radius:17px;
+  background:
+    linear-gradient(145deg,#4d1970,#160724);
+  border:1px solid #7e36ac;
+  box-shadow:
+    inset 0 0 30px rgba(0,0,0,.5),
+    0 10px 35px rgba(0,0,0,.35);
+}
 
 .board{
-  max-width:760px;
-  margin:auto;
+  width:100%;
+  aspect-ratio:6/5;
   display:grid;
   grid-template-columns:repeat(6,1fr);
-  gap:8px;
+  grid-template-rows:repeat(5,1fr);
+  gap:5px;
+  padding:5px;
+  border-radius:12px;
+  background:#0d0517;
 }
 
-.symbol{
-  aspect-ratio:1;
-  border-radius:14px;
-  border:1px solid #644079;
-  background:
-    radial-gradient(circle at 35% 25%,#fff6,transparent 18%),
-    linear-gradient(145deg,#3b1760,#170b24);
+.cell{
+  position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:38px;
-  box-shadow:
-    inset 0 0 20px rgba(168,85,247,.16),
-    0 4px 12px #0008;
-  cursor:pointer;
-  user-select:none;
+  border-radius:8px;
+  background:
+    radial-gradient(circle at 50% 25%,#55227a,#21102f 70%);
+  border:1px solid rgba(199,103,255,.24);
+  font-size:clamp(25px,4.8vw,46px);
+  overflow:hidden;
   transition:.15s;
 }
 
-.symbol:hover{
-  transform:scale(1.05);
-  border-color:#c084fc;
+.cell::after{
+  content:"";
+  position:absolute;
+  top:4px;
+  left:8px;
+  right:8px;
+  height:18%;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
 }
 
-.symbol.selected{
-  transform:scale(1.08);
-  border:3px solid #ffd166;
-  box-shadow:0 0 25px #a855f7;
+.cell.match{
+  animation:
+    matchPop .38s ease forwards,
+    glow .38s ease infinite alternate;
 }
 
-.symbol.break{
-  animation:breakGem .45s ease forwards;
+.cell.new{
+  animation:drop .35s ease;
 }
 
-@keyframes breakGem{
-  40%{
-    transform:scale(1.35) rotate(8deg);
-    filter:brightness(2);
-  }
-  100%{
-    opacity:0;
-    transform:scale(.1) rotate(30deg);
-  }
+@keyframes matchPop{
+  0%{transform:scale(1);opacity:1}
+  60%{transform:scale(1.2);opacity:1}
+  100%{transform:scale(.1);opacity:0}
 }
 
-/* CONTROLS */
-
-.controls{
-  max-width:760px;
-  margin:18px auto 0;
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
+@keyframes glow{
+  from{box-shadow:0 0 5px #d45cff}
+  to{box-shadow:0 0 25px #f2a1ff}
 }
 
-.controlBtn{
-  min-width:75px;
-  border:1px solid #5b3871;
-  background:#241331;
-  color:white;
-  padding:12px 17px;
-  border-radius:12px;
-  cursor:pointer;
+@keyframes drop{
+  from{transform:translateY(-30px);opacity:0}
+  to{transform:translateY(0);opacity:1}
 }
 
-.spin{
-  min-width:160px;
-  font-size:20px;
-  font-weight:1000;
-  background:linear-gradient(135deg,#6d28d9,#a855f7,#7c3aed);
-  border:1px solid #d8b4fe;
-  box-shadow:0 0 25px rgba(168,85,247,.35);
+/* =========================
+   DRAGON METER
+========================= */
+
+.dragon{
+  margin-top:7px;
+  padding:6px 9px;
+  background:#18091f;
+  border:1px solid #6d2b6c;
+  border-radius:9px;
 }
 
-.controlBtn:hover{
-  filter:brightness(1.25);
-}
-
-/* MESSAGE */
-
-.message{
-  min-height:45px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:#d8cbe5;
-  font-weight:bold;
-  margin-top:10px;
-}
-
-/* DRAGON */
-
-.awaken{
-  max-width:760px;
-  margin:0 auto 15px;
-  padding:12px;
-  border-radius:15px;
-  background:#0d0712;
-  border:1px solid #54276e;
-}
-
-.awakenHeader{
+.dragon-head{
   display:flex;
   justify-content:space-between;
-  margin-bottom:7px;
+  font-size:11px;
+  margin-bottom:4px;
 }
 
-.awakenBar{
-  height:15px;
-  background:#241528;
+.meter{
+  height:9px;
   border-radius:20px;
+  background:#09040d;
   overflow:hidden;
 }
 
-.awakenFill{
-  height:100%;
+.meter-fill{
   width:0%;
-  background:linear-gradient(90deg,#7c3aed,#c084fc,#ffd166);
-  box-shadow:0 0 20px #a855f7;
-  transition:.5s;
+  height:100%;
+  background:linear-gradient(90deg,#8b20ff,#ff39a9,#ffdc4e);
+  box-shadow:0 0 12px #ff36aa;
+  transition:.3s;
 }
 
-/* BOSS */
+/* =========================
+   CONTROL
+========================= */
 
-.boss{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:20;
+.controls{
+  margin-top:9px;
+  display:grid;
+  grid-template-columns:120px 1fr 120px;
+  gap:8px;
   align-items:center;
-  justify-content:center;
-  background:rgba(8,2,14,.88);
-  backdrop-filter:blur(10px);
 }
 
-.boss.show{
+.control-box{
+  background:#1c0b2b;
+  border:1px solid #5c2b7b;
+  border-radius:10px;
+  padding:6px;
+}
+
+.control-box label{
+  display:block;
+  font-size:9px;
+  color:#ad94bd;
+  margin-bottom:3px;
+}
+
+.bet-row{
   display:flex;
+  align-items:center;
+  gap:4px;
 }
 
-.bossBox{
-  width:min(700px,90%);
-  padding:35px;
-  text-align:center;
-  border-radius:28px;
-  border:2px solid #c084fc;
-  background:
-    radial-gradient(circle,#4c1d70,#12051b 70%);
-  box-shadow:0 0 100px rgba(168,85,247,.6);
-  animation:bossPop .7s cubic-bezier(.2,1.5,.4,1);
-}
-
-@keyframes bossPop{
-  from{
-    opacity:0;
-    transform:scale(.3) rotate(-5deg);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-.bossDragon{
-  font-size:150px;
-  animation:dragonFloat 1.5s infinite ease-in-out;
-}
-
-@keyframes dragonFloat{
-  50%{
-    transform:translateY(-15px) scale(1.04);
-  }
-}
-
-.bossBox h2{
-  font-size:42px;
-  color:#e9d5ff;
-  text-shadow:0 0 20px #a855f7;
-}
-
-.bossBox p{
-  color:#d8cbe5;
-  margin:10px 0 20px;
-}
-
-.closeBoss{
+.bet-row button{
+  width:26px;
+  height:25px;
   border:0;
-  padding:12px 25px;
-  border-radius:12px;
+  border-radius:6px;
+  background:#492064;
   color:white;
+  cursor:pointer;
   font-weight:bold;
-  background:linear-gradient(90deg,#7c3aed,#a855f7);
+}
+
+#bet{
+  flex:1;
+  text-align:center;
+  font-weight:900;
+}
+
+.spin{
+  height:55px;
+  border:0;
+  border-radius:13px;
+  cursor:pointer;
+  color:white;
+  font-size:20px;
+  font-weight:1000;
+  background:
+    linear-gradient(180deg,#d15cff,#8120db);
+  box-shadow:
+    0 5px 0 #47107a,
+    0 0 25px rgba(183,61,255,.35);
+  transition:.1s;
+}
+
+.spin:hover{
+  filter:brightness(1.15);
+}
+
+.spin:active{
+  transform:translateY(4px);
+  box-shadow:0 1px 0 #47107a;
+}
+
+.spin:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+/* =========================
+   AUTO
+========================= */
+
+.auto-area{
+  position:relative;
+}
+
+.auto-button{
+  width:100%;
+  height:55px;
+  border:1px solid #71339a;
+  border-radius:13px;
+  background:#261035;
+  color:white;
+  font-weight:1000;
   cursor:pointer;
 }
 
-/* FOOTER */
+.auto-button.running{
+  background:linear-gradient(180deg,#e23e8f,#8d1e75);
+  border-color:#ff71c3;
+}
 
-.footer{
+.auto-menu{
+  display:none;
+  position:absolute;
+  z-index:30;
+  left:0;
+  right:0;
+  bottom:62px;
+  padding:6px;
+  background:#180925;
+  border:1px solid #8238ae;
+  border-radius:12px;
+  box-shadow:0 12px 35px #000;
+}
+
+.auto-menu.show{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px;
+}
+
+.auto-option{
+  border:1px solid #5b2778;
+  background:#291039;
+  color:white;
+  padding:9px 4px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:900;
+}
+
+.auto-option:hover{
+  background:#7033a0;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
   text-align:center;
-  color:#6f607a;
+  min-height:24px;
+  margin-top:5px;
+  color:#cdb5db;
   font-size:12px;
-  margin-top:45px;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:1050px){
-  .games{
-    grid-template-columns:repeat(3,1fr);
-  }
+.win{
+  color:#ffd65c;
+  font-weight:1000;
+  animation:winPulse .4s ease infinite alternate;
 }
 
-@media(max-width:700px){
-  .header{
-    height:auto;
-    flex-wrap:wrap;
-  }
+@keyframes winPulse{
+  from{transform:scale(1)}
+  to{transform:scale(1.06)}
+}
 
-  .nav{
-    order:3;
-    width:100%;
-    justify-content:center;
-  }
+/* =========================
+   FREE POPUP
+========================= */
 
-  .hero{
-    padding:25px;
-    min-height:230px;
-  }
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(7,2,15,.78);
+  backdrop-filter:blur(6px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+}
 
-  .hero h1{
-    font-size:42px;
-  }
+.overlay.show{
+  display:flex;
+}
 
+.popup{
+  width:min(430px,90%);
+  text-align:center;
+  padding:32px 20px;
+  border-radius:25px;
+  background:
+    radial-gradient(circle at 50% 0%,#7130a0,#210b35 60%);
+  border:2px solid #d15cff;
+  box-shadow:
+    0 0 35px #9e32ff,
+    inset 0 0 35px rgba(200,70,255,.2);
+  animation:popupIn .4s ease;
+}
+
+@keyframes popupIn{
+  from{transform:scale(.5);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.free-icon{
+  font-size:65px;
+  animation:float 1s ease-in-out infinite alternate;
+}
+
+@keyframes float{
+  to{transform:translateY(-9px) rotate(4deg)}
+}
+
+.popup h1{
+  font-size:42px;
+  color:#6ffcff;
+  text-shadow:0 0 25px #00d9ff;
+  margin:8px 0;
+}
+
+.popup p{
+  color:#dbc9e8;
+  margin-bottom:15px;
+}
+
+.popup button{
+  border:0;
+  padding:11px 28px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#d460ff,#7b25d5);
+  color:white;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+/* =========================
+   FREE BANNER
+========================= */
+
+.free-banner{
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) scale(.5);
+  opacity:0;
+  pointer-events:none;
+  z-index:120;
+  text-align:center;
+  transition:.3s;
+}
+
+.free-banner.show{
+  transform:translate(-50%,-50%) scale(1);
+  opacity:1;
+}
+
+.free-banner .big{
+  font-size:clamp(42px,10vw,90px);
+  font-weight:1000;
+  color:#67faff;
+  text-shadow:
+    0 0 10px #fff,
+    0 0 25px #00d9ff,
+    0 0 50px #9d37ff;
+}
+
+.free-banner .sub{
+  font-size:25px;
+  font-weight:1000;
+  color:#fff;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
   .games{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .board{
-    grid-template-columns:repeat(5,1fr);
+  .game-card:last-child{
+    grid-column:span 2;
   }
 
-  .symbol{
-    font-size:30px;
+  .controls{
+    grid-template-columns:95px 1fr 95px;
+  }
+
+  .spin,
+  .auto-button{
+    height:50px;
   }
 }
 
-@media(max-width:430px){
-  .app{
-    width:96%;
-  }
-
-  .games{
-    grid-template-columns:1fr;
-  }
-
-  .board{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .symbol{
-    font-size:27px;
+@media(max-width:500px){
+  header{
+    height:54px;
+    padding:0 12px;
   }
 
   .logo{
-    font-size:24px;
+    font-size:20px;
   }
 
   .balance{
-    margin-left:auto;
+    font-size:12px;
+    padding:6px 10px;
+  }
+
+  #lobby{
+    padding:20px 10px;
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .game-card{
+    min-height:175px;
+  }
+
+  .game-icon{
+    height:90px;
+    font-size:58px;
+  }
+
+  #gamePage{
+    padding:7px;
+  }
+
+  .topbar{
+    height:42px;
+  }
+
+  .game-title{
+    font-size:17px;
+  }
+
+  .hud{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .board-area{
+    padding:5px;
+  }
+
+  .board{
+    gap:3px;
+    padding:3px;
+  }
+
+  .cell{
+    border-radius:5px;
+  }
+
+  .controls{
+    grid-template-columns:1fr 1.5fr 1fr;
+    gap:4px;
+  }
+
+  .control-box{
+    padding:5px;
+  }
+
+  .spin,
+  .auto-button{
+    height:48px;
+    font-size:16px;
+  }
+
+  .bet-row button{
+    width:22px;
   }
 }
 </style>
@@ -648,880 +717,1139 @@ button{
 
 <body>
 
-<div class="app">
+<header>
+  <div class="logo">SLLOT888</div>
+  <div class="balance">💰 <span id="balance">10,000</span></div>
+</header>
 
-  <!-- HEADER -->
-  <header class="header">
+<!-- =========================
+     LOBBY
+========================= -->
 
-    <div class="logo">
-      SLLOT<span>888</span>
+<section id="lobby">
+
+  <div class="hero">
+    <h1>🎰 SLLOT888</h1>
+    <p>เลือกเกมของคุณ</p>
+  </div>
+
+  <div class="games">
+
+    <div class="game-card" onclick="openGame('mahjong')">
+      <div class="game-icon">🀄</div>
+      <div>
+        <h2>Mahjong</h2>
+        <p>Ancient Chinese</p>
+      </div>
     </div>
 
-    <nav class="nav">
-      <button onclick="showLobby()">HOME</button>
-      <button onclick="scrollGames()">GAMES</button>
-      <button onclick="showBonus()">BONUS</button>
-    </nav>
-
-    <div class="balance">
-      <span class="coin">🪙</span>
-      <strong id="balance">10,000</strong>
+    <div class="game-card" onclick="openGame('cave')">
+      <div class="game-icon">👩</div>
+      <div>
+        <h2>Cave Girls</h2>
+        <p>Lost Cave Adventure</p>
+      </div>
     </div>
 
-  </header>
+    <div class="game-card" onclick="openGame('cat')">
+      <div class="game-icon">🐱</div>
+      <div>
+        <h2>Lucky Cat</h2>
+        <p>Japanese Fortune</p>
+      </div>
+    </div>
 
+    <div class="game-card" onclick="openGame('dragon')">
+      <div class="game-icon">🐉</div>
+      <div>
+        <h2>Dragon Awakening</h2>
+        <p>Awaken Mother Dragon</p>
+      </div>
+    </div>
 
-  <!-- LOBBY -->
+    <div class="game-card" onclick="openGame('treasure')">
+      <div class="game-icon">💎</div>
+      <div>
+        <h2>Treasure</h2>
+        <p>Ancient Lost Treasure</p>
+      </div>
+    </div>
 
-  <main id="lobby">
+  </div>
+</section>
 
-    <section class="hero">
+<!-- =========================
+     GAME
+========================= -->
 
-      <div class="heroText">
+<section id="gamePage">
 
-        <small>WELCOME TO</small>
+  <div class="game-wrap">
 
-        <h1>
-          SLLOT<span>888</span>
-        </h1>
+    <div class="topbar">
+      <button class="back" onclick="backLobby()">← Lobby</button>
 
-        <p>
-          โลกแห่งเกมแฟนตาซีสีม่วง
-          รวมเกม Mahjong, Cave Girls,
-          Lucky Cat, Dragon Awakening
-          และ Treasure ไว้ในที่เดียว
-        </p>
-
+      <div class="game-title">
+        <span id="gameName">Mahjong</span>
+        <small id="gameSub">Ancient Chinese</small>
       </div>
 
-    </section>
-
-
-    <div class="sectionTitle">
-      <h2>🎮 GAME COLLECTION</h2>
-      <span>CHOOSE YOUR ADVENTURE</span>
+      <div style="width:70px"></div>
     </div>
 
+    <div class="hud">
 
-    <section class="games" id="games">
+      <div class="hud-box">
+        <div class="hud-label">BALANCE</div>
+        <div class="hud-value" id="hudBalance">10,000</div>
+      </div>
 
-      <!-- MAHJONG -->
+      <div class="hud-box">
+        <div class="hud-label">WIN</div>
+        <div class="hud-value" id="win">0</div>
+      </div>
 
-      <article class="card" onclick="openGame('mahjong')">
+      <div class="hud-box">
+        <div class="hud-label">FREE SPINS</div>
+        <div class="hud-value free-value" id="freeCount">0</div>
+      </div>
 
-        <div class="cardArt">
-          🀄
+      <div class="hud-box">
+        <div class="hud-label">AUTO</div>
+        <div class="hud-value auto-value" id="autoCount">OFF</div>
+      </div>
+
+    </div>
+
+    <div class="board-area">
+      <div class="board" id="board"></div>
+    </div>
+
+    <div class="dragon" id="dragonBox" style="display:none">
+      <div class="dragon-head">
+        <span>🐉 MOTHER DRAGON</span>
+        <span id="dragonPercent">0%</span>
+      </div>
+      <div class="meter">
+        <div class="meter-fill" id="dragonMeter"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+
+      <div class="control-box">
+        <label>BET</label>
+        <div class="bet-row">
+          <button onclick="changeBet(-10)">−</button>
+          <div id="bet">100</div>
+          <button onclick="changeBet(10)">+</button>
         </div>
+      </div>
 
-        <div class="cardInfo">
-          <h3>MAHJONG</h3>
-          <p>Ancient Chinese Mahjong</p>
-
-          <button class="play">
-            PLAY NOW
-          </button>
-        </div>
-
-      </article>
-
-
-      <!-- CAVE GIRLS -->
-
-      <article class="card" onclick="openGame('cave')">
-
-        <div class="cardArt">
-          👩‍🦰
-        </div>
-
-        <div class="cardInfo">
-          <h3>CAVE GIRLS</h3>
-          <p>Adventure in the Ancient Cave</p>
-
-          <button class="play">
-            PLAY NOW
-          </button>
-        </div>
-
-      </article>
-
-
-      <!-- LUCKY CAT -->
-
-      <article class="card" onclick="openGame('cat')">
-
-        <div class="cardArt">
-          🐱
-        </div>
-
-        <div class="cardInfo">
-          <h3>LUCKY CAT</h3>
-          <p>Japanese Fortune Adventure</p>
-
-          <button class="play">
-            PLAY NOW
-          </button>
-        </div>
-
-      </article>
-
-
-      <!-- DRAGON -->
-
-      <article class="card" onclick="openGame('dragon')">
-
-        <div class="cardArt">
-          🐉
-        </div>
-
-        <div class="cardInfo">
-          <h3>DRAGON AWAKENING</h3>
-          <p>Break More — Wake Mother Dragon</p>
-
-          <button class="play">
-            PLAY NOW
-          </button>
-        </div>
-
-      </article>
-
-
-      <!-- TREASURE -->
-
-      <article class="card" onclick="openGame('treasure')">
-
-        <div class="cardArt">
-          💰
-        </div>
-
-        <div class="cardInfo">
-          <h3>TREASURE</h3>
-          <p>Find the Ancient Treasure</p>
-
-          <button class="play">
-            PLAY NOW
-          </button>
-        </div>
-
-      </article>
-
-    </section>
-
-  </main>
-
-
-  <!-- GAME -->
-
-  <section id="gameScreen" class="gameScreen">
-
-    <div class="gameTop">
-
-      <button class="back" onclick="showLobby()">
-        ← BACK
+      <button class="spin" id="spinBtn" onclick="manualSpin()">
+        SPIN
       </button>
 
-      <div class="gameTitle" id="gameTitle">
-        GAME
-      </div>
+      <div class="auto-area">
 
-      <div></div>
-
-    </div>
-
-
-    <div class="gameArea">
-
-      <div class="hud">
-
-        <div class="hudBox">
-          <small>BALANCE</small>
-          <strong id="gameBalance">10,000</strong>
-        </div>
-
-        <div class="hudBox">
-          <small>BET</small>
-          <strong id="bet">20</strong>
-        </div>
-
-        <div class="hudBox">
-          <small>WIN</small>
-          <strong id="win">0</strong>
-        </div>
-
-        <div class="hudBox">
-          <small>COMBO</small>
-          <strong id="combo">x0</strong>
-        </div>
-
-      </div>
-
-
-      <!-- DRAGON METER -->
-
-      <div id="dragonMeter" class="awaken">
-
-        <div class="awakenHeader">
-          <strong>🐉 MOTHER DRAGON AWAKENING</strong>
-          <strong id="meterText">0%</strong>
-        </div>
-
-        <div class="awakenBar">
-          <div id="meterFill" class="awakenFill"></div>
-        </div>
-
-      </div>
-
-
-      <div id="board" class="board"></div>
-
-
-      <div id="message" class="message">
-        กด SPIN เพื่อเริ่มเกม
-      </div>
-
-
-      <div class="controls">
-
-        <button class="controlBtn" onclick="changeBet(-10)">
-          BET -
+        <button
+          class="auto-button"
+          id="autoBtn"
+          onclick="toggleAutoMenu()">
+          🔄 AUTO
         </button>
 
-        <button class="controlBtn" onclick="changeBet(10)">
-          BET +
-        </button>
+        <div class="auto-menu" id="autoMenu">
 
-        <button class="controlBtn">
-          AUTO
-        </button>
+          <button class="auto-option" onclick="startAuto(5)">
+            5
+          </button>
 
-        <button class="controlBtn spin" onclick="spin()">
-          ⚡ SPIN
-        </button>
+          <button class="auto-option" onclick="startAuto(10)">
+            10
+          </button>
 
+          <button class="auto-option" onclick="startAuto(25)">
+            25
+          </button>
+
+          <button class="auto-option" onclick="startAuto(50)">
+            50
+          </button>
+
+          <button
+            class="auto-option"
+            style="grid-column:span 2"
+            onclick="startAuto(100)">
+            100
+          </button>
+
+        </div>
       </div>
 
     </div>
 
-  </section>
-
-
-  <footer class="footer">
-    SLLOT888 • Fantasy Game Collection • Demo Version
-  </footer>
-
-</div>
-
-
-<!-- MOTHER DRAGON POPUP -->
-
-<div id="boss" class="boss">
-
-  <div class="bossBox">
-
-    <div class="bossDragon">
-      🐉
+    <div class="status" id="status">
+      เลือกเดิมพันแล้วกด SPIN
     </div>
 
-    <h2>
-      MOTHER DRAGON
-    </h2>
+  </div>
 
-    <p>
-      🔥 THE MOTHER DRAGON AWAKENS! 🔥
-      <br>
-      โบนัสพิเศษกำลังเริ่มต้น
+</section>
+
+<!-- =========================
+     FREE POPUP
+========================= -->
+
+<div class="overlay" id="freeOverlay">
+
+  <div class="popup">
+
+    <div class="free-icon">🆓</div>
+
+    <h1>FREE SPINS</h1>
+
+    <p id="freeMessage">
+      คุณได้รับ Free Spins!
     </p>
 
-    <button class="closeBoss" onclick="closeBoss()">
-      ENTER DRAGON RAGE
+    <button onclick="startFreeFromPopup()">
+      START FREE
     </button>
 
   </div>
 
 </div>
 
+<div class="free-banner" id="freeBanner">
+
+  <div class="big">FREE SPINS</div>
+
+  <div class="sub">
+    <span id="bannerCount">10</span> SPINS
+  </div>
+
+</div>
 
 <script>
 
-/* =========================
-   SLLOT888 GAME ENGINE
-========================= */
-
-let balance = 10000;
-let bet = 20;
-let win = 0;
-let combo = 0;
-
-let currentGame = "";
-let selected = null;
-let busy = false;
-
-let dragonMeter = 0;
+/* =========================================================
+   GAME DATA
+========================================================= */
 
 const games = {
 
   mahjong:{
-    title:"🀄 MAHJONG",
-    symbols:["🀄","🀅","🀆","🀇","🀈","🀉","🪙","🏮"]
+    name:"Mahjong",
+    sub:"Ancient Chinese",
+    symbols:[
+      "🀄","🀅","🀆","🀇",
+      "🀈","🀉","🪙","🏮"
+    ],
+    free:"MAHJONG BONUS"
   },
 
   cave:{
-    title:"👩 CAVE GIRLS",
-    symbols:["👩","🪨","🔥","🦴","💰","🦖","💎","🗿"]
+    name:"Cave Girls",
+    sub:"Lost Cave Adventure",
+    symbols:[
+      "👩","🪨","🔥","🦴",
+      "💰","🦖","💎","🗿"
+    ],
+    free:"CAVE FREE"
   },
 
   cat:{
-    title:"🐱 LUCKY CAT",
-    symbols:["🐱","🧧","🪙","🏮","🎋","🐟","💰","⭐"]
+    name:"Lucky Cat",
+    sub:"Japanese Fortune",
+    symbols:[
+      "🐱","🧧","🪙","🏮",
+      "🎋","🐟","💰","⭐"
+    ],
+    free:"LUCKY FREE"
   },
 
   dragon:{
-    title:"🐉 DRAGON AWAKENING",
-    symbols:["🐉","🔥","🥚","💰","🪙","👑","⚔️","🐲"]
+    name:"Dragon Awakening",
+    sub:"Mother Dragon",
+    symbols:[
+      "🐉","🔥","🥚","💰",
+      "🪙","👑","⚔️","🐲"
+    ],
+    free:"DRAGON FREE"
   },
 
   treasure:{
-    title:"💰 TREASURE",
-    symbols:["💰","🪙","💎","🗝️","🏆","📜","👑","⚓"]
+    name:"Treasure",
+    sub:"Ancient Lost Treasure",
+    symbols:[
+      "💰","🪙","💎","🗝️",
+      "🏆","📜","👑","⚓"
+    ],
+    free:"TREASURE FREE"
   }
 
 };
 
 
-/* =========================
-   LOBBY
-========================= */
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-function showLobby(){
+let currentGame = "mahjong";
 
-  document.getElementById("lobby").style.display="block";
+let balance = 10000;
 
-  document
-    .getElementById("gameScreen")
-    .classList.remove("active");
+let bet = 100;
 
-}
+let spinning = false;
 
-function scrollGames(){
+let autoRunning = false;
 
-  document
-    .getElementById("games")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
+let autoRemaining = 0;
 
-}
+let freeSpins = 0;
 
-function showBonus(){
+let freeTotalWin = 0;
 
-  alert(
-    "🎁 BONUS CENTER\n\n"+
-    "กำลังเตรียมระบบ Bonus ของ SLLOT888"
-  );
+let pendingFree = 0;
 
-}
+let dragonProgress = 0;
+
+let combo = 1;
+
+let board = [];
 
 
-/* =========================
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const lobby =
+  document.getElementById("lobby");
+
+const gamePage =
+  document.getElementById("gamePage");
+
+const boardEl =
+  document.getElementById("board");
+
+const balanceEl =
+  document.getElementById("balance");
+
+const hudBalance =
+  document.getElementById("hudBalance");
+
+const betEl =
+  document.getElementById("bet");
+
+const winEl =
+  document.getElementById("win");
+
+const freeCountEl =
+  document.getElementById("freeCount");
+
+const autoCountEl =
+  document.getElementById("autoCount");
+
+const statusEl =
+  document.getElementById("status");
+
+const spinBtn =
+  document.getElementById("spinBtn");
+
+const autoBtn =
+  document.getElementById("autoBtn");
+
+const autoMenu =
+  document.getElementById("autoMenu");
+
+const freeOverlay =
+  document.getElementById("freeOverlay");
+
+const freeMessage =
+  document.getElementById("freeMessage");
+
+const freeBanner =
+  document.getElementById("freeBanner");
+
+const bannerCount =
+  document.getElementById("bannerCount");
+
+const dragonBox =
+  document.getElementById("dragonBox");
+
+const dragonMeter =
+  document.getElementById("dragonMeter");
+
+const dragonPercent =
+  document.getElementById("dragonPercent");
+
+
+/* =========================================================
    OPEN GAME
-========================= */
+========================================================= */
 
-function openGame(name){
+function openGame(game){
 
-  currentGame=name;
+  currentGame = game;
 
-  document.getElementById("lobby").style.display="none";
+  lobby.style.display = "none";
 
-  document
-    .getElementById("gameScreen")
-    .classList.add("active");
+  gamePage.style.display = "block";
 
-  document.getElementById("gameTitle").textContent=
-    games[name].title;
+  document.getElementById("gameName").textContent =
+    games[game].name;
 
-  if(name==="dragon"){
+  document.getElementById("gameSub").textContent =
+    games[game].sub;
 
-    document
-      .getElementById("dragonMeter")
-      .style.display="block";
+  dragonBox.style.display =
+    game === "dragon" ? "block" : "none";
 
-  }else{
+  winEl.textContent = "0";
 
-    document
-      .getElementById("dragonMeter")
-      .style.display="none";
+  renderBoard();
 
+  updateUI();
+
+  statusEl.textContent =
+    "เลือกเดิมพันแล้วกด SPIN";
+
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+function backLobby(){
+
+  if(spinning){
+    return;
   }
 
-  generateBoard();
+  stopAuto();
 
-  document.getElementById("message").textContent=
-    "กด SPIN เพื่อเริ่มเกม";
+  gamePage.style.display = "none";
+
+  lobby.style.display = "block";
 
 }
 
 
-/* =========================
+/* =========================================================
    BOARD
-========================= */
+========================================================= */
+
+function randomSymbol(){
+
+  const symbols =
+    games[currentGame].symbols;
+
+  return symbols[
+    Math.floor(Math.random()*symbols.length)
+  ];
+
+}
+
 
 function generateBoard(){
 
-  const board=
-    document.getElementById("board");
-
-  board.innerHTML="";
-
-  let symbols=
-    games[currentGame].symbols;
+  board = [];
 
   for(let i=0;i<30;i++){
 
-    let div=
+    board.push(randomSymbol());
+
+  }
+
+}
+
+
+function renderBoard(){
+
+  generateBoard();
+
+  boardEl.innerHTML = "";
+
+  board.forEach((symbol,index)=>{
+
+    const cell =
       document.createElement("div");
 
-    div.className="symbol";
+    cell.className = "cell new";
 
-    div.textContent=
-      symbols[
-        Math.floor(
-          Math.random()*symbols.length
-        )
-      ];
+    cell.dataset.index = index;
 
-    div.dataset.index=i;
+    cell.textContent = symbol;
 
-    div.onclick=()=>{
-      selectSymbol(div)
-    };
-
-    board.appendChild(div);
-  }
-
-}
-
-
-/* =========================
-   SELECT
-========================= */
-
-function selectSymbol(el){
-
-  if(busy)return;
-
-  if(selected===null){
-
-    selected=el;
-
-    el.classList.add("selected");
-
-    return;
-
-  }
-
-  if(selected===el){
-
-    el.classList.remove("selected");
-
-    selected=null;
-
-    return;
-
-  }
-
-  let all=
-    [...document.querySelectorAll(".symbol")];
-
-  let a=
-    Number(selected.dataset.index);
-
-  let b=
-    Number(el.dataset.index);
-
-  let rowA=
-    Math.floor(a/6);
-
-  let colA=
-    a%6;
-
-  let rowB=
-    Math.floor(b/6);
-
-  let colB=
-    b%6;
-
-  if(
-    Math.abs(rowA-rowB)+
-    Math.abs(colA-colB)!==1
-  ){
-
-    selected.classList.remove("selected");
-
-    selected=null;
-
-    return;
-  }
-
-  let temp=
-    selected.textContent;
-
-  selected.textContent=
-    el.textContent;
-
-  el.textContent=temp;
-
-  selected.classList.remove("selected");
-
-  selected=null;
-
-  checkMatch();
-
-}
-
-
-/* =========================
-   SPIN
-========================= */
-
-async function spin(){
-
-  if(busy)return;
-
-  if(balance<bet){
-
-    document.getElementById("message").textContent=
-      "เหรียญไม่พอ";
-
-    return;
-
-  }
-
-  busy=true;
-
-  balance-=bet;
-
-  updateHUD();
-
-  document.getElementById("message").textContent=
-    "✨ กำลังหมุน...";
-
-  let cells=
-    [...document.querySelectorAll(".symbol")];
-
-  for(let t=0;t<8;t++){
-
-    cells.forEach(cell=>{
-
-      let symbols=
-        games[currentGame].symbols;
-
-      cell.textContent=
-        symbols[
-          Math.floor(
-            Math.random()*symbols.length
-          )
-        ];
-
-    });
-
-    await wait(80);
-
-  }
-
-  await checkMatch(true);
-
-}
-
-
-/* =========================
-   MATCH
-========================= */
-
-async function checkMatch(fromSpin=false){
-
-  if(busy===false)
-    busy=true;
-
-  let cells=
-    [...document.querySelectorAll(".symbol")];
-
-  let matches=[];
-
-  /*
-    Simple demo matching:
-    random groups create satisfying
-    cascade gameplay.
-  */
-
-  let count=
-    3+
-    Math.floor(Math.random()*5);
-
-  let used=[];
-
-  while(used.length<count){
-
-    let index=
-      Math.floor(
-        Math.random()*cells.length
-      );
-
-    if(!used.includes(index))
-      used.push(index);
-
-  }
-
-  used.forEach(i=>{
-    matches.push(cells[i]);
-  });
-
-  combo++;
-
-  let payout=
-    bet*
-    matches.length*
-    combo;
-
-  win+=payout;
-
-  balance+=payout;
-
-  matches.forEach(el=>{
-    el.classList.add("break");
-  });
-
-
-  /* DRAGON */
-
-  if(currentGame==="dragon"){
-
-    dragonMeter+=
-      matches.length*8+
-      combo*2;
-
-    dragonMeter=
-      Math.min(100,dragonMeter);
-
-    updateDragonMeter();
-
-  }
-
-
-  updateHUD();
-
-  document.getElementById("message").textContent=
-    "💥 แตก "+matches.length+
-    " ตัว • Combo x"+combo+
-    " • WIN "+payout;
-
-
-  await wait(450);
-
-
-  cells.forEach(el=>{
-
-    el.classList.remove("break");
-
-    let symbols=
-      games[currentGame].symbols;
-
-    el.textContent=
-      symbols[
-        Math.floor(
-          Math.random()*symbols.length
-        )
-      ];
+    boardEl.appendChild(cell);
 
   });
 
+}
 
-  await wait(250);
 
+/* =========================================================
+   UPDATE UI
+========================================================= */
 
-  /*
-    Cascade chance
-  */
+function updateUI(){
 
-  if(Math.random()<.45 && combo<6){
+  balanceEl.textContent =
+    Math.floor(balance).toLocaleString();
 
-    document.getElementById("message").textContent=
-      "🌊 CASCADE!";
+  hudBalance.textContent =
+    Math.floor(balance).toLocaleString();
 
-    busy=false;
+  betEl.textContent =
+    bet.toLocaleString();
 
-    await wait(300);
+  freeCountEl.textContent =
+    freeSpins;
 
-    await checkMatch();
+  if(autoRunning){
 
-    return;
+    autoCountEl.textContent =
+      autoRemaining;
+
+  }else{
+
+    autoCountEl.textContent =
+      "OFF";
 
   }
 
-
-  /* DRAGON AWAKEN */
-
-  if(
-    currentGame==="dragon" &&
-    dragonMeter>=100
-  ){
-
-    busy=false;
-
-    showMotherDragon();
-
-    return;
-
-  }
-
-
-  combo=0;
-
-  updateHUD();
-
-  document.getElementById("message").textContent=
-    "✨ รอบจบแล้ว — กด SPIN อีกครั้ง";
-
-  busy=false;
-
 }
 
 
-/* =========================
-   DRAGON METER
-========================= */
-
-function updateDragonMeter(){
-
-  document
-    .getElementById("meterFill")
-    .style.width=
-      dragonMeter+"%";
-
-  document
-    .getElementById("meterText")
-    .textContent=
-      dragonMeter+"%";
-
-}
-
-
-/* =========================
-   MOTHER DRAGON
-========================= */
-
-function showMotherDragon(){
-
-  document
-    .getElementById("boss")
-    .classList.add("show");
-
-  document
-    .getElementById("message")
-    .textContent=
-      "🐉 MOTHER DRAGON AWAKENED!";
-
-}
-
-
-/* =========================
-   CLOSE BOSS
-========================= */
-
-function closeBoss(){
-
-  document
-    .getElementById("boss")
-    .classList.remove("show");
-
-  /*
-    Bonus from Mother Dragon
-  */
-
-  let bonus=
-    bet*25;
-
-  balance+=bonus;
-
-  dragonMeter=0;
-
-  combo=0;
-
-  updateDragonMeter();
-
-  updateHUD();
-
-  document
-    .getElementById("message")
-    .textContent=
-      "🔥 DRAGON RAGE BONUS +"+
-      bonus+
-      " COINS!";
-
-}
-
-
-/* =========================
+/* =========================================================
    BET
-========================= */
+========================================================= */
 
 function changeBet(amount){
 
-  if(busy)return;
+  if(spinning || autoRunning || freeSpins > 0){
+    return;
+  }
 
-  bet+=amount;
+  bet += amount;
 
-  if(bet<10)
-    bet=10;
+  if(bet < 10){
+    bet = 10;
+  }
 
-  if(bet>500)
-    bet=500;
+  if(bet > 1000){
+    bet = 1000;
+  }
 
-  document
-    .getElementById("bet")
-    .textContent=
-      bet;
-
-}
-
-
-/* =========================
-   HUD
-========================= */
-
-function updateHUD(){
-
-  document
-    .getElementById("balance")
-    .textContent=
-      balance.toLocaleString();
-
-  document
-    .getElementById("gameBalance")
-    .textContent=
-      balance.toLocaleString();
-
-  document
-    .getElementById("bet")
-    .textContent=
-      bet;
-
-  document
-    .getElementById("win")
-    .textContent=
-      win;
-
-  document
-    .getElementById("combo")
-    .textContent=
-      "x"+combo;
+  updateUI();
 
 }
 
 
-/* =========================
+/* =========================================================
+   MANUAL SPIN
+========================================================= */
+
+async function manualSpin(){
+
+  if(spinning){
+    return;
+  }
+
+  if(freeSpins > 0){
+    return;
+  }
+
+  await normalSpin();
+
+}
+
+
+/* =========================================================
+   NORMAL SPIN
+========================================================= */
+
+async function normalSpin(){
+
+  if(balance < bet){
+
+    statusEl.textContent =
+      "💰 เครดิตไม่พอ";
+
+    stopAuto();
+
+    return false;
+
+  }
+
+  spinning = true;
+
+  spinBtn.disabled = true;
+
+  balance -= bet;
+
+  updateUI();
+
+  statusEl.textContent =
+    "กำลังหมุน...";
+
+  await animateSpin();
+
+  generateBoard();
+
+  renderBoard();
+
+  await sleep(180);
+
+  const result =
+    await evaluateBoard(false);
+
+  spinning = false;
+
+  spinBtn.disabled = false;
+
+  return result;
+
+}
+
+
+/* =========================================================
+   SPIN ANIMATION
+========================================================= */
+
+async function animateSpin(){
+
+  const cells =
+    document.querySelectorAll(".cell");
+
+  for(let frame=0;frame<7;frame++){
+
+    cells.forEach(cell=>{
+
+      cell.textContent =
+        randomSymbol();
+
+    });
+
+    await sleep(70);
+
+  }
+
+}
+
+
+/* =========================================================
+   EVALUATE
+========================================================= */
+
+async function evaluateBoard(isFree){
+
+  let matches = [];
+
+  /*
+    DEMO MATCH SYSTEM
+
+    สุ่มจำนวนช่องที่เกิด Match
+    เพื่อทำ Cascade ให้เห็นภาพ
+  */
+
+  const matchCount =
+    Math.floor(Math.random()*5)+3;
+
+  const used = new Set();
+
+  while(used.size < matchCount){
+
+    used.add(
+      Math.floor(Math.random()*30)
+    );
+
+  }
+
+  matches =
+    [...used];
+
+  const cells =
+    document.querySelectorAll(".cell");
+
+  matches.forEach(i=>{
+
+    if(cells[i]){
+      cells[i].classList.add("match");
+    }
+
+  });
+
+  await sleep(380);
+
+  /*
+    WIN
+  */
+
+  const multiplier =
+    isFree
+      ? (1 + Math.floor(Math.random()*3))
+      : combo;
+
+  const win =
+    Math.floor(
+      bet *
+      matches.length *
+      .18 *
+      multiplier
+    );
+
+  balance += win;
+
+  winEl.textContent =
+    win.toLocaleString();
+
+  if(win > 0){
+
+    statusEl.innerHTML =
+      `<span class="win">✨ WIN +${win.toLocaleString()} ✨</span>`;
+
+  }
+
+  if(isFree){
+
+    freeTotalWin += win;
+
+  }
+
+  /*
+    DRAGON
+  */
+
+  if(currentGame === "dragon"){
+
+    dragonProgress +=
+      matches.length * 5;
+
+    if(isFree){
+
+      dragonProgress += 3;
+
+    }
+
+    if(dragonProgress >= 100){
+
+      dragonProgress = 0;
+
+      await motherDragon();
+
+    }
+
+    updateDragon();
+
+  }
+
+  /*
+    CASCADE
+  */
+
+  await sleep(80);
+
+  matches.forEach(i=>{
+
+    board[i] =
+      randomSymbol();
+
+  });
+
+  renderBoard();
+
+  combo++;
+
+  if(combo > 5){
+    combo = 1;
+  }
+
+  updateUI();
+
+  /*
+    FREE SCATTER
+  */
+
+  if(!isFree){
+
+    const scatter =
+      Math.random() < 0.18;
+
+    if(scatter){
+
+      const scatterCount =
+        Math.random() < 0.7 ? 3 : 2;
+
+      if(scatterCount >= 3){
+
+        pendingFree = 10;
+
+        await triggerFree();
+
+      }
+
+    }
+
+  }
+
+  return true;
+
+}
+
+
+/* =========================================================
+   FREE TRIGGER
+========================================================= */
+
+async function triggerFree(){
+
+  stopAuto();
+
+  freeMessage.textContent =
+    `${games[currentGame].free} — คุณได้รับ 10 FREE SPINS!`;
+
+  freeOverlay.classList.add("show");
+
+  await sleep(100);
+
+}
+
+
+/* =========================================================
+   START FREE FROM POPUP
+========================================================= */
+
+async function startFreeFromPopup(){
+
+  freeOverlay.classList.remove("show");
+
+  freeSpins = pendingFree;
+
+  pendingFree = 0;
+
+  freeTotalWin = 0;
+
+  combo = 1;
+
+  updateUI();
+
+  showFreeBanner();
+
+  await sleep(1300);
+
+  await runFreeSpins();
+
+}
+
+
+/* =========================================================
+   FREE BANNER
+========================================================= */
+
+async function showFreeBanner(){
+
+  bannerCount.textContent =
+    freeSpins;
+
+  freeBanner.classList.add("show");
+
+  await sleep(1200);
+
+  freeBanner.classList.remove("show");
+
+}
+
+
+/* =========================================================
+   RUN FREE SPINS
+========================================================= */
+
+async function runFreeSpins(){
+
+  while(freeSpins > 0){
+
+    freeSpins--;
+
+    updateUI();
+
+    statusEl.innerHTML =
+      `🆓 FREE SPIN — เหลือ <b>${freeSpins}</b>`;
+
+    await performFreeSpin();
+
+    /*
+      Bonus chance
+      ได้ Free เพิ่มระหว่าง Free
+    */
+
+    if(Math.random() < 0.12){
+
+      freeSpins += 2;
+
+      statusEl.innerHTML =
+        `🔥 +2 FREE SPINS!`;
+
+      updateUI();
+
+      await sleep(600);
+
+    }
+
+  }
+
+  statusEl.innerHTML =
+    `🎉 FREE COMPLETE +${freeTotalWin.toLocaleString()}`;
+
+  await sleep(1400);
+
+  freeTotalWin = 0;
+
+  updateUI();
+
+}
+
+
+/* =========================================================
+   FREE SPIN ROUND
+========================================================= */
+
+async function performFreeSpin(){
+
+  spinning = true;
+
+  spinBtn.disabled = true;
+
+  await animateSpin();
+
+  generateBoard();
+
+  renderBoard();
+
+  await sleep(180);
+
+  await evaluateBoard(true);
+
+  await sleep(450);
+
+  spinning = false;
+
+  spinBtn.disabled = false;
+
+}
+
+
+/* =========================================================
+   AUTO MENU
+========================================================= */
+
+function toggleAutoMenu(){
+
+  if(spinning || freeSpins > 0){
+    return;
+  }
+
+  if(autoRunning){
+
+    stopAuto();
+
+    return;
+
+  }
+
+  autoMenu.classList.toggle("show");
+
+}
+
+
+/* =========================================================
+   START AUTO
+========================================================= */
+
+function startAuto(amount){
+
+  autoMenu.classList.remove("show");
+
+  if(spinning || freeSpins > 0){
+    return;
+  }
+
+  autoRunning = true;
+
+  autoRemaining = amount;
+
+  autoBtn.classList.add("running");
+
+  autoBtn.textContent =
+    "⏹ STOP";
+
+  updateUI();
+
+  statusEl.textContent =
+    `🔄 AUTO ${amount} รอบ`;
+
+  autoLoop();
+
+}
+
+
+/* =========================================================
+   AUTO LOOP
+========================================================= */
+
+async function autoLoop(){
+
+  while(
+    autoRunning &&
+    autoRemaining > 0
+  ){
+
+    if(balance < bet){
+
+      statusEl.textContent =
+        "💰 เครดิตไม่พอ — AUTO หยุด";
+
+      stopAuto();
+
+      return;
+
+    }
+
+    autoRemaining--;
+
+    updateUI();
+
+    const result =
+      await normalSpin();
+
+    /*
+      ถ้า Free ถูก Trigger
+      normalSpin จะจบหลังเปิด Popup
+
+      หยุด Auto ก่อน Free
+    */
+
+    if(!autoRunning){
+      break;
+    }
+
+    if(freeOverlay.classList.contains("show")){
+
+      stopAuto();
+
+      return;
+
+    }
+
+    await sleep(350);
+
+  }
+
+  if(autoRunning){
+
+    stopAuto();
+
+    statusEl.textContent =
+      "✅ AUTO SPIN จบแล้ว";
+
+  }
+
+}
+
+
+/* =========================================================
+   STOP AUTO
+========================================================= */
+
+function stopAuto(){
+
+  autoRunning = false;
+
+  autoRemaining = 0;
+
+  autoBtn.classList.remove("running");
+
+  autoBtn.textContent =
+    "🔄 AUTO";
+
+  updateUI();
+
+}
+
+
+/* =========================================================
+   DRAGON
+========================================================= */
+
+function updateDragon(){
+
+  const value =
+    Math.min(100,dragonProgress);
+
+  dragonMeter.style.width =
+    value + "%";
+
+  dragonPercent.textContent =
+    value + "%";
+
+}
+
+
+async function motherDragon(){
+
+  statusEl.innerHTML =
+    "🐉 <b class='win'>MOTHER DRAGON AWAKENED!</b>";
+
+  const overlay =
+    document.createElement("div");
+
+  overlay.className = "overlay show";
+
+  overlay.innerHTML = `
+    <div class="popup">
+      <div class="free-icon">🐉</div>
+      <h1 style="color:#ff9b48">AWAKENED</h1>
+      <p>Mother Dragon has awakened!</p>
+      <p style="font-size:24px;color:#ffd75a">
+        +${(bet*25).toLocaleString()}
+      </p>
+      <button id="dragonClose">
+        COLLECT
+      </button>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  balance += bet * 25;
+
+  updateUI();
+
+  await new Promise(resolve=>{
+
+    document
+      .getElementById("dragonClose")
+      .onclick = ()=>{
+
+        overlay.remove();
+
+        resolve();
+
+      };
+
+  });
+
+}
+
+
+/* =========================================================
    UTILITY
-========================= */
+========================================================= */
 
-function wait(ms){
+function sleep(ms){
 
   return new Promise(
     resolve=>setTimeout(resolve,ms)
@@ -1530,11 +1858,28 @@ function wait(ms){
 }
 
 
-/* =========================
-   INIT
-========================= */
+/* =========================================================
+   CLOSE AUTO MENU WHEN CLICK OUTSIDE
+========================================================= */
 
-updateHUD();
+document.addEventListener("click",function(e){
+
+  if(
+    !e.target.closest(".auto-area")
+  ){
+
+    autoMenu.classList.remove("show");
+
+  }
+
+});
+
+
+/* =========================================================
+   INITIAL
+========================================================= */
+
+updateUI();
 
 </script>
 
