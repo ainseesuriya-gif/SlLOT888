@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Crystal Kingdom — Match 3 Cascade</title>
+<title>SLLOT888 — Purple Game Center</title>
 
 <style>
 *{
@@ -13,2217 +13,926 @@
 }
 
 :root{
-  --bg:#050611;
-  --panel:#10152f;
-  --panel2:#171d3e;
-  --line:#39467e;
-  --text:#f7f9ff;
-  --muted:#8b95bd;
-  --cyan:#65eaff;
-  --gold:#ffd95a;
-  --purple:#a967ff;
-  --pink:#ff5bd6;
-}
-
-html,body{
-  min-height:100%;
+  --purple:#7c3aed;
+  --purple2:#a855f7;
+  --purple3:#c084fc;
+  --dark:#090611;
+  --panel:#150d24;
+  --panel2:#211234;
+  --gold:#ffd166;
+  --white:#fff;
 }
 
 body{
   min-height:100vh;
-  color:var(--text);
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,"Noto Sans Thai",sans-serif;
+  color:white;
   background:
-    radial-gradient(
-      circle at 50% -10%,
-      #343c91 0%,
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 0% 100%,
-      #28114f 0%,
-      transparent 35%
-    ),
-    linear-gradient(
-      145deg,
-      #03040d,
-      #080a1b 45%,
-      #050611
-    );
-
+    radial-gradient(circle at 50% -10%,#5b21b6 0%,transparent 35%),
+    radial-gradient(circle at 10% 80%,#3b0764 0%,transparent 30%),
+    linear-gradient(135deg,#07030d,#12051f 50%,#07030d);
   overflow-x:hidden;
 }
 
-button{
-  font-family:inherit;
-}
-
-/* =========================================
-   BACKGROUND
-========================================= */
-
-#stars{
+body:before{
+  content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:-1;
-  overflow:hidden;
+  opacity:.25;
+  background-image:
+    radial-gradient(circle,#fff 1px,transparent 1px);
+  background-size:90px 90px;
+  animation:stars 20s linear infinite;
 }
 
-.star-dot{
-  position:absolute;
-  width:2px;
-  height:2px;
-  border-radius:50%;
-  background:#fff;
-  opacity:.4;
-  animation:twinkle 3s infinite alternate;
+@keyframes stars{
+  from{transform:translateY(0)}
+  to{transform:translateY(90px)}
 }
 
-@keyframes twinkle{
-  from{
-    opacity:.15;
-    transform:scale(.6);
-  }
-
-  to{
-    opacity:.9;
-    transform:scale(1.6);
-  }
+button{
+  font:inherit;
 }
 
-/* =========================================
-   HEADER
-========================================= */
+.app{
+  width:min(1400px,94%);
+  margin:auto;
+  padding:22px 0 50px;
+}
 
-.topbar{
-  height:74px;
-  padding:0 28px;
+/* HEADER */
 
+.header{
+  height:75px;
+  padding:12px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  position:sticky;
-  top:0;
-  z-index:100;
-
-  background:rgba(5,7,20,.82);
-  border-bottom:1px solid #5664a522;
-
-  backdrop-filter:blur(18px);
+  gap:15px;
+  background:rgba(20,10,34,.88);
+  border:1px solid rgba(192,132,252,.28);
+  border-radius:20px;
+  backdrop-filter:blur(15px);
+  box-shadow:0 0 35px rgba(124,58,237,.2);
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:13px;
-
-  font-size:21px;
+  font-size:30px;
   font-weight:1000;
-  letter-spacing:1px;
+  letter-spacing:3px;
+  color:white;
+  text-shadow:
+    0 0 8px #a855f7,
+    0 0 25px #7c3aed;
 }
 
 .logo span{
-  color:var(--cyan);
+  color:#c084fc;
 }
 
-.logo-gem{
-  width:39px;
-  height:39px;
-
-  transform:rotate(45deg);
-
-  border-radius:9px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #69edff 28%,
-      #5962ff 62%,
-      #c451ff
-    );
-
-  box-shadow:
-    0 0 15px #65eaff,
-    0 0 35px #8a52ff55,
-    inset 2px 2px 5px #fff;
-}
-
-.top-actions{
+.nav{
   display:flex;
   gap:8px;
 }
 
-.icon-btn{
-  width:42px;
-  height:42px;
-
+.nav button{
+  border:1px solid #49315e;
+  background:#21132f;
+  color:#ddd;
+  padding:10px 15px;
   border-radius:12px;
-
-  border:1px solid #3d477a;
-  background:#10152d;
-
-  color:#fff;
-  font-size:17px;
-
   cursor:pointer;
-
-  transition:.2s;
 }
 
-.icon-btn:hover{
-  border-color:var(--cyan);
-  box-shadow:0 0 20px #65eaff33;
+.nav button:hover{
+  background:#7c3aed;
+  color:white;
 }
 
-/* =========================================
-   LOBBY
-========================================= */
-
-.lobby{
-  max-width:1200px;
-  margin:auto;
-  padding:42px 20px 70px;
+.balance{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  background:#0c0713;
+  padding:10px 15px;
+  border-radius:13px;
+  border:1px solid #6d28d9;
 }
+
+.coin{
+  font-size:21px;
+}
+
+/* HERO */
 
 .hero{
-  text-align:center;
-  margin-bottom:35px;
+  position:relative;
+  margin-top:22px;
+  min-height:270px;
+  overflow:hidden;
+  border-radius:27px;
+  padding:35px;
+  display:flex;
+  align-items:center;
+  background:
+    radial-gradient(circle at 80% 40%,rgba(168,85,247,.5),transparent 30%),
+    linear-gradient(120deg,#170b28,#32115c,#14081f);
+  border:1px solid rgba(192,132,252,.3);
+  box-shadow:inset 0 0 60px rgba(124,58,237,.15);
+}
+
+.hero:after{
+  content:"✦  ✧  ✦  ✧  ✦";
+  position:absolute;
+  right:5%;
+  top:15%;
+  font-size:80px;
+  letter-spacing:25px;
+  color:#c084fc;
+  opacity:.13;
+}
+
+.heroText{
+  position:relative;
+  z-index:2;
+  max-width:680px;
+}
+
+.hero small{
+  color:#c084fc;
+  font-weight:bold;
+  letter-spacing:3px;
 }
 
 .hero h1{
-  font-size:clamp(35px,6vw,68px);
-  line-height:1;
-
+  margin-top:8px;
+  font-size:clamp(38px,6vw,70px);
+  line-height:.95;
   font-weight:1000;
-  letter-spacing:-3px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #fff,
-      #6deeff,
-      #b36aff,
-      #ff65d9,
-      #fff
-    );
-
-  background-size:300%;
-
-  color:transparent;
-  background-clip:text;
-  -webkit-background-clip:text;
-
-  animation:titleShine 5s linear infinite;
-
-  text-shadow:0 0 30px #6beaff22;
 }
 
-@keyframes titleShine{
-  to{
-    background-position:300%;
-  }
+.hero h1 span{
+  color:#c084fc;
 }
 
 .hero p{
-  margin-top:12px;
-  color:var(--muted);
+  margin-top:18px;
+  color:#d8cbe5;
+  font-size:17px;
+  line-height:1.6;
 }
 
-.game-grid{
+/* SECTION */
+
+.sectionTitle{
+  margin:35px 5px 17px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.sectionTitle h2{
+  font-size:25px;
+}
+
+.sectionTitle span{
+  color:#a78bfa;
+  font-size:13px;
+}
+
+/* GAME CARDS */
+
+.games{
   display:grid;
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:18px;
+  grid-template-columns:repeat(5,1fr);
+  gap:15px;
 }
 
-.game-card{
-  min-height:245px;
-
-  border-radius:23px;
-
-  overflow:hidden;
-
-  border:1px solid #343e70;
-
-  background:#0c1025;
-
-  cursor:pointer;
-
-  transition:.3s;
-
-  box-shadow:
-    0 15px 40px #0005;
-}
-
-.game-card:hover{
-  transform:translateY(-7px);
-
-  border-color:var(--cyan);
-
-  box-shadow:
-    0 25px 55px #0008,
-    0 0 30px #65eaff1c;
-}
-
-.card-art{
-  height:155px;
-
+.card{
   position:relative;
-
+  min-height:300px;
   overflow:hidden;
-
-  background:var(--art);
-}
-
-.card-art:before{
-  content:"";
-
-  position:absolute;
-
-  width:180px;
-  height:180px;
-
-  left:50%;
-  top:50%;
-
-  transform:translate(-50%,-50%);
-
-  border-radius:50%;
-
-  background:#fff1;
-
-  filter:blur(30px);
-}
-
-.card-crystal{
-  position:absolute;
-
-  width:58px;
-  height:58px;
-
-  left:50%;
-  top:50%;
-
-  transform:
-    translate(-50%,-50%)
-    rotate(45deg);
-
-  border-radius:12px;
-
+  border-radius:22px;
   background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #6cecff 35%,
-      #4c55ff 70%,
-      #c54cff
-    );
+    linear-gradient(160deg,#261238,#100817);
+  border:1px solid #4c2870;
+  cursor:pointer;
+  transition:.35s;
+}
 
+.card:hover{
+  transform:translateY(-8px);
+  border-color:#c084fc;
   box-shadow:
-    0 0 30px #65eaff;
-
-  animation:cardFloat 2.5s ease-in-out infinite;
+    0 15px 45px rgba(124,58,237,.35),
+    inset 0 0 30px rgba(168,85,247,.12);
 }
 
-.card-crystal.small{
-  width:28px;
-  height:28px;
-
-  left:30%;
-  top:32%;
-
-  opacity:.7;
-
-  animation-delay:.5s;
+.cardArt{
+  height:190px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:90px;
+  position:relative;
+  background:
+    radial-gradient(circle,rgba(192,132,252,.28),transparent 50%),
+    linear-gradient(180deg,#32145a,#13091d);
 }
 
-.card-crystal.small2{
-  width:25px;
-  height:25px;
-
-  left:70%;
-  top:70%;
-
-  opacity:.65;
-
-  animation-delay:1s;
+.cardArt:after{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 0 35px rgba(168,85,247,.5);
 }
 
-@keyframes cardFloat{
-  0%,100%{
-    transform:
-      translate(-50%,-50%)
-      rotate(45deg)
-      translateY(0);
-  }
-
-  50%{
-    transform:
-      translate(-50%,-50%)
-      rotate(55deg)
-      translateY(-7px);
-  }
+.cardInfo{
+  padding:15px;
 }
 
-.card-info{
-  padding:16px 18px;
-}
-
-.card-info h3{
+.cardInfo h3{
   font-size:19px;
 }
 
-.card-info p{
+.cardInfo p{
   margin-top:6px;
-  color:var(--muted);
-  font-size:13px;
+  font-size:12px;
+  color:#aa9ab8;
 }
 
-/* =========================================
-   GAME
-========================================= */
+.play{
+  margin-top:12px;
+  width:100%;
+  border:0;
+  padding:11px;
+  border-radius:11px;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  background:linear-gradient(90deg,#6d28d9,#a855f7);
+  box-shadow:0 0 18px rgba(168,85,247,.25);
+}
 
-.game{
+/* GAME SCREEN */
+
+.gameScreen{
   display:none;
-
-  min-height:
-    calc(100vh - 74px);
-
-  padding:20px 12px 60px;
 }
 
-.game.active{
+.gameScreen.active{
   display:block;
+  animation:screenIn .35s ease;
 }
 
-.game-wrap{
-  width:min(1000px,100%);
-  margin:auto;
+@keyframes screenIn{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.gameTop{
+  margin-top:22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
 
 .back{
-  border:0;
-  background:none;
-
-  color:#a4afd7;
-
-  font-size:14px;
-
+  background:#241331;
+  color:white;
+  border:1px solid #573875;
+  padding:10px 16px;
+  border-radius:12px;
   cursor:pointer;
-
-  margin-bottom:13px;
 }
 
-.machine{
-  position:relative;
+.gameTitle{
+  font-size:25px;
+  font-weight:bold;
+}
 
+/* SLOT AREA */
+
+.gameArea{
+  margin-top:18px;
   padding:20px;
-
-  border-radius:30px;
-
-  border:1px solid #4c5a93;
-
   background:
-    linear-gradient(
-      145deg,
-      #1b2250,
-      #0d112c 55%,
-      #07091b
-    );
-
-  box-shadow:
-    0 30px 90px #000b,
-    inset 0 1px 0 #ffffff16;
+    radial-gradient(circle at center,#321451,#12081b 65%);
+  border:1px solid #593276;
+  border-radius:25px;
+  box-shadow:0 0 50px rgba(124,58,237,.18);
 }
-
-.machine-title{
-  text-align:center;
-  margin-bottom:17px;
-}
-
-.machine-title small{
-  display:block;
-
-  color:#7783b2;
-
-  font-size:10px;
-
-  letter-spacing:4px;
-
-  margin-bottom:5px;
-}
-
-.machine-title h2{
-  font-size:
-    clamp(28px,5vw,43px);
-
-  text-shadow:
-    0 0 15px #65eaff88,
-    0 0 35px #65eaff33;
-}
-
-/* =========================================
-   HUD
-========================================= */
 
 .hud{
-  display:grid;
-
-  grid-template-columns:
-    repeat(5,1fr);
-
-  gap:9px;
-
-  margin-bottom:16px;
-}
-
-.hud-box{
-  min-height:64px;
-
-  border-radius:15px;
-
-  border:1px solid #303a68;
-
-  background:#080c20aa;
-
   display:flex;
-
-  align-items:center;
   justify-content:center;
-
-  flex-direction:column;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:15px;
 }
 
-.hud-label{
-  color:#7984af;
-
-  font-size:9px;
-
-  letter-spacing:1.5px;
-
-  text-transform:uppercase;
+.hudBox{
+  min-width:110px;
+  text-align:center;
+  background:#0c0712;
+  border:1px solid #42245c;
+  padding:9px 14px;
+  border-radius:12px;
 }
 
-.hud-value{
-  margin-top:4px;
-
-  font-size:20px;
-
-  font-weight:1000;
+.hudBox small{
+  color:#9d8ba8;
+  display:block;
+  font-size:10px;
 }
 
-#freeSpinDisplay{
-  color:#ff9df0;
-
-  text-shadow:
-    0 0 12px #ff5bd6,
-    0 0 25px #a967ff;
+.hudBox strong{
+  color:#fff;
 }
 
-#winDisplay{
-  color:var(--gold);
-
-  text-shadow:
-    0 0 12px #ffd95a,
-    0 0 25px #ff9d24;
-}
-
-/* =========================================
-   BOARD
-========================================= */
-
-.board-shell{
-  width:100%;
-
-  padding:12px;
-
-  border-radius:24px;
-
-  border:1px solid #59679c;
-
-  background:
-    linear-gradient(
-      145deg,
-      #293264,
-      #10142f
-    );
-
-  box-shadow:
-    inset 0 0 35px #0008,
-    0 0 35px #65eaff12;
-}
+/* BOARD */
 
 .board{
-  width:min(680px,100%);
-
-  aspect-ratio:5/3;
-
+  max-width:760px;
   margin:auto;
-
   display:grid;
-
-  grid-template-columns:
-    repeat(5,1fr);
-
-  grid-template-rows:
-    repeat(3,1fr);
-
+  grid-template-columns:repeat(6,1fr);
   gap:8px;
-
-  padding:8px;
-
-  border-radius:17px;
-
-  position:relative;
-
-  overflow:hidden;
-
-  background:
-    radial-gradient(
-      circle at 50% 50%,
-      #1b2455,
-      #070a20 75%
-    );
 }
 
-.cell{
-  min-width:0;
-  min-height:0;
-
+.symbol{
+  aspect-ratio:1;
+  border-radius:14px;
+  border:1px solid #644079;
+  background:
+    radial-gradient(circle at 35% 25%,#fff6,transparent 18%),
+    linear-gradient(145deg,#3b1760,#170b24);
   display:flex;
-
   align-items:center;
   justify-content:center;
-
-  position:relative;
-
-  border-radius:13px;
-
-  border:1px solid #303a69;
-
-  background:
-    linear-gradient(
-      145deg,
-      #171d3b,
-      #0b0f26
-    );
-
-  transition:
-    background .2s;
-}
-
-.cell:hover{
-  background:#1a2350;
-}
-
-/* =========================================
-   CRYSTALS
-========================================= */
-
-.gem{
-  width:68%;
-  height:68%;
-
-  position:relative;
-
+  font-size:38px;
   box-shadow:
-    0 0 15px var(--glow),
-    inset 3px 3px 7px #fff9,
-    inset -5px -6px 9px #0005;
-
-  filter:saturate(1.15);
-
-  transition:.2s;
+    inset 0 0 20px rgba(168,85,247,.16),
+    0 4px 12px #0008;
+  cursor:pointer;
+  user-select:none;
+  transition:.15s;
 }
 
-.gem:before{
-  content:"";
-
-  position:absolute;
-
-  width:25%;
-  height:25%;
-
-  left:13%;
-  top:10%;
-
-  border-radius:50%;
-
-  background:#fff;
-
-  opacity:.85;
-
-  filter:blur(1px);
+.symbol:hover{
+  transform:scale(1.05);
+  border-color:#c084fc;
 }
 
-.gem:after{
-  content:"";
-
-  position:absolute;
-
-  width:40%;
-  height:12%;
-
-  left:30%;
-  bottom:12%;
-
-  border-radius:50%;
-
-  background:#fff;
-
-  opacity:.18;
+.symbol.selected{
+  transform:scale(1.08);
+  border:3px solid #ffd166;
+  box-shadow:0 0 25px #a855f7;
 }
 
-/* BLUE - DIAMOND */
-
-.gem.blue{
-  --glow:#36ddff;
-
-  clip-path:
-    polygon(
-      50% 0%,
-      88% 28%,
-      76% 77%,
-      50% 100%,
-      24% 77%,
-      12% 28%
-    );
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #66efff 28%,
-      #287bff 62%,
-      #242f9e
-    );
+.symbol.break{
+  animation:breakGem .45s ease forwards;
 }
 
-/* PINK - HEART */
-
-.gem.pink{
-  --glow:#ff4fd5;
-
-  clip-path:
-    polygon(
-      50% 94%,
-      8% 52%,
-      7% 30%,
-      18% 15%,
-      34% 12%,
-      50% 29%,
-      66% 12%,
-      82% 15%,
-      93% 30%,
-      92% 52%
-    );
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #ff75df 30%,
-      #d929a4 65%,
-      #6e1b72
-    );
-}
-
-/* GREEN - HEX */
-
-.gem.green{
-  --glow:#42ffae;
-
-  clip-path:
-    polygon(
-      25% 2%,
-      75% 2%,
-      100% 50%,
-      75% 98%,
-      25% 98%,
-      0% 50%
-    );
-
-  background:
-    linear-gradient(
-      135deg,
-      #f2fff9,
-      #4cffb5 28%,
-      #12a778 65%,
-      #075b4c
-    );
-}
-
-/* RED - FLAME */
-
-.gem.red{
-  --glow:#ff405d;
-
-  clip-path:
-    polygon(
-      51% 0%,
-      69% 27%,
-      91% 17%,
-      81% 45%,
-      100% 57%,
-      70% 61%,
-      68% 100%,
-      50% 77%,
-      31% 100%,
-      29% 63%,
-      4% 56%,
-      25% 39%,
-      24% 18%,
-      40% 30%
-    );
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #ff6b7a 25%,
-      #ed284e 60%,
-      #761333
-    );
-}
-
-/* GOLD - STAR */
-
-.gem.gold{
-  --glow:#ffd43d;
-
-  clip-path:
-    polygon(
-      50% 0%,
-      61% 34%,
-      98% 38%,
-      68% 59%,
-      79% 98%,
-      50% 75%,
-      21% 98%,
-      32% 59%,
-      2% 38%,
-      39% 34%
-    );
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #ffe983 25%,
-      #f2ad26 63%,
-      #96510c
-    );
-}
-
-/* PURPLE - HEXAGON */
-
-.gem.purple{
-  --glow:#a85cff;
-
-  clip-path:
-    polygon(
-      50% 0%,
-      92% 25%,
-      92% 75%,
-      50% 100%,
-      8% 75%,
-      8% 25%
-    );
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #c18bff 25%,
-      #7439df 65%,
-      #3c1b91
-    );
-}
-
-/* =========================================
-   SCATTER — SPECIAL
-========================================= */
-
-.gem.scatter{
-  width:82%;
-  height:82%;
-
-  border-radius:50%;
-
-  position:relative;
-
-  background:
-    radial-gradient(
-      circle at 31% 20%,
-      #ffffff 0%,
-      #ffffff 5%,
-      #fffbc7 11%,
-      #ffe04b 21%,
-      #ffae25 35%,
-      #ff4f96 53%,
-      #9b43ff 74%,
-      #311a8b 100%
-    );
-
-  border:
-    3px solid #fff0a2;
-
-  box-shadow:
-    0 0 8px #fff,
-    0 0 18px #ffe66a,
-    0 0 35px #ff9c27,
-    0 0 65px #d947ff,
-    inset 0 0 18px #fff9;
-
-  transform:rotate(0);
-
-  z-index:10;
-
-  animation:
-    scatterFloat 1.4s ease-in-out infinite,
-    scatterGlow 1s ease-in-out infinite alternate;
-}
-
-.gem.scatter:before{
-  content:"";
-
-  position:absolute;
-
-  width:122%;
-  height:122%;
-
-  left:-11%;
-  top:-11%;
-
-  border-radius:50%;
-
-  border:
-    2px solid #ffe76a;
-
-  box-shadow:
-    0 0 10px #fff,
-    0 0 25px #ff9b24;
-
-  opacity:.8;
-
-  animation:
-    scatterRing 3s linear infinite;
-}
-
-.gem.scatter:after{
-  content:"";
-
-  position:absolute;
-
-  width:145%;
-  height:145%;
-
-  left:-22.5%;
-  top:-22.5%;
-
-  border-radius:50%;
-
-  border:
-    1px dashed #fff4a4;
-
-  opacity:.65;
-
-  animation:
-    scatterRingReverse 5s linear infinite;
-}
-
-.scatter-core{
-  position:absolute;
-
-  inset:0;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  color:#fff;
-
-  font-size:
-    clamp(9px,2vw,17px);
-
-  font-weight:1000;
-
-  letter-spacing:1px;
-
-  text-shadow:
-    0 2px 2px #721b00,
-    0 0 6px #fff,
-    0 0 15px #ffe76a;
-
-  z-index:20;
-}
-
-.scatter-spark{
-  position:absolute;
-
-  width:6px;
-  height:6px;
-
-  border-radius:50%;
-
-  background:#fff;
-
-  box-shadow:
-    0 0 7px #fff,
-    0 0 16px #ffe66b;
-
-  z-index:25;
-
-  animation:
-    sparkPulse .7s infinite alternate;
-}
-
-@keyframes scatterFloat{
-  0%,100%{
-    transform:
-      translateY(0)
-      scale(1);
+@keyframes breakGem{
+  40%{
+    transform:scale(1.35) rotate(8deg);
+    filter:brightness(2);
   }
-
-  50%{
-    transform:
-      translateY(-5px)
-      scale(1.08);
-  }
-}
-
-@keyframes scatterGlow{
-  from{
-    filter:brightness(1);
-  }
-
-  to{
-    filter:brightness(1.5);
-  }
-}
-
-@keyframes scatterRing{
-  from{
-    transform:
-      rotate(0)
-      scale(.9);
-  }
-
-  to{
-    transform:
-      rotate(360deg)
-      scale(1.08);
-  }
-}
-
-@keyframes scatterRingReverse{
-  from{
-    transform:
-      rotate(360deg)
-      scale(1);
-  }
-
-  to{
-    transform:
-      rotate(0)
-      scale(.9);
-  }
-}
-
-@keyframes sparkPulse{
-  from{
-    transform:scale(.6);
-    opacity:.4;
-  }
-
-  to{
-    transform:scale(1.7);
-    opacity:1;
-  }
-}
-
-/* =========================================
-   WIN ANIMATION
-========================================= */
-
-.cell.win .gem{
-  animation:
-    winningGem .3s infinite alternate;
-}
-
-@keyframes winningGem{
-  from{
-    filter:brightness(1);
-    transform:scale(1);
-  }
-
-  to{
-    filter:brightness(1.8);
-    transform:scale(1.14);
-  }
-}
-
-.cell.removing .gem{
-  animation:
-    gemExplode .43s forwards;
-}
-
-@keyframes gemExplode{
-  0%{
-    opacity:1;
-    transform:scale(1);
-  }
-
-  35%{
-    opacity:1;
-    transform:scale(1.28) rotate(12deg);
-  }
-
-  70%{
-    opacity:.8;
-    transform:scale(.65) rotate(35deg);
-  }
-
   100%{
     opacity:0;
-    transform:scale(.05) rotate(100deg);
+    transform:scale(.1) rotate(30deg);
   }
 }
 
-.cell.falling .gem{
-  animation:
-    gemFall .45s cubic-bezier(.15,.8,.25,1);
-}
-
-@keyframes gemFall{
-  0%{
-    transform:
-      translateY(-180%)
-      scale(.75);
-    opacity:0;
-  }
-
-  65%{
-    transform:
-      translateY(12%)
-      scale(1.05);
-    opacity:1;
-  }
-
-  100%{
-    transform:
-      translateY(0)
-      scale(1);
-  }
-}
-
-/* =========================================
-   FREE TRIGGER
-========================================= */
-
-.cell.free-trigger .gem.scatter{
-  animation:
-    freeTrigger .32s infinite alternate;
-}
-
-@keyframes freeTrigger{
-  from{
-    transform:scale(1);
-    filter:brightness(1);
-  }
-
-  to{
-    transform:scale(1.3);
-    filter:brightness(2.2);
-  }
-}
-
-/* =========================================
-   WIN BANNER
-========================================= */
-
-.win-banner{
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.4);
-
-  opacity:0;
-
-  pointer-events:none;
-
-  z-index:50;
-
-  white-space:nowrap;
-
-  font-size:
-    clamp(35px,8vw,76px);
-
-  font-style:italic;
-
-  font-weight:1000;
-
-  color:#fff;
-
-  text-shadow:
-    0 3px 0 #895400,
-    0 0 10px #fff,
-    0 0 25px #ffd84c,
-    0 0 50px #ff8e18;
-}
-
-.win-banner.show{
-  animation:
-    winText .9s cubic-bezier(.15,.9,.2,1) forwards;
-}
-
-@keyframes winText{
-  0%{
-    opacity:0;
-
-    transform:
-      translate(-50%,-50%)
-      scale(.4)
-      rotate(-10deg);
-  }
-
-  25%{
-    opacity:1;
-
-    transform:
-      translate(-50%,-50%)
-      scale(1.2)
-      rotate(4deg);
-  }
-
-  55%{
-    transform:
-      translate(-50%,-50%)
-      scale(1)
-      rotate(0);
-  }
-
-  100%{
-    opacity:0;
-
-    transform:
-      translate(-50%,-68%)
-      scale(1.15);
-  }
-}
-
-/* =========================================
-   PARTICLES
-========================================= */
-
-.particle{
-  position:fixed;
-
-  width:7px;
-  height:7px;
-
-  border-radius:50%;
-
-  background:#fff;
-
-  box-shadow:
-    0 0 8px #fff,
-    0 0 16px #ffd95a;
-
-  pointer-events:none;
-
-  z-index:500;
-
-  animation:
-    particleFly .8s ease-out forwards;
-}
-
-@keyframes particleFly{
-  0%{
-    transform:
-      translate(0,0)
-      scale(1);
-    opacity:1;
-  }
-
-  100%{
-    transform:
-      translate(var(--x),var(--y))
-      scale(0);
-    opacity:0;
-  }
-}
-
-/* =========================================
-   CONTROLS
-========================================= */
+/* CONTROLS */
 
 .controls{
-  display:grid;
-
-  grid-template-columns:
-    1fr 1.8fr 1fr;
-
-  gap:11px;
-
-  margin-top:15px;
-}
-
-.control-btn{
-  min-height:53px;
-
-  border-radius:15px;
-
-  border:1px solid #3c477c;
-
-  background:
-    linear-gradient(
-      145deg,
-      #161d3c,
-      #0d1129
-    );
-
-  color:#fff;
-
-  font-size:14px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-.control-btn:hover{
-  transform:translateY(-2px);
-
-  border-color:var(--cyan);
-
-  box-shadow:
-    0 8px 25px #65eaff18;
-}
-
-.control-btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-  transform:none;
-}
-
-.spin-btn{
-  border-color:#8065ff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #5d48ff,
-      #9255ff 50%,
-      #db4fc7
-    );
-
-  font-size:20px;
-
-  letter-spacing:1px;
-
-  box-shadow:
-    0 0 25px #855cff44;
-}
-
-.spin-btn:hover{
-  box-shadow:
-    0 0 40px #9b6aff77;
-}
-
-.free-btn{
-  border-color:#d36cff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #7034ff,
-      #bc4fff 48%,
-      #ff5bb5
-    );
-
-  box-shadow:
-    0 0 25px #d45cff44;
-}
-
-.free-btn:hover{
-  box-shadow:
-    0 0 45px #e264ff88;
-}
-
-/* =========================================
-   BET
-========================================= */
-
-.bet-row{
+  max-width:760px;
+  margin:18px auto 0;
   display:flex;
-
-  align-items:center;
   justify-content:center;
-
-  gap:9px;
-
-  margin-top:14px;
-
-  color:#8b95bc;
-
-  font-size:13px;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.bet-btn{
-  width:34px;
-  height:32px;
-
-  border-radius:9px;
-
-  border:1px solid #3a4577;
-
-  background:#0e132b;
-
-  color:#fff;
-
-  cursor:pointer;
-}
-
-.bet-number{
-  min-width:60px;
-
-  text-align:center;
-
-  color:#fff;
-
-  font-weight:1000;
-}
-
-/* =========================================
-   INFO
-========================================= */
-
-.info{
-  max-width:700px;
-
-  margin:16px auto 0;
-
-  text-align:center;
-
-  color:#737ea9;
-
-  font-size:12px;
-
-  line-height:1.7;
-}
-
-.cascade-badge{
-  display:inline-flex;
-
-  margin-top:7px;
-
-  padding:5px 11px;
-
-  border-radius:99px;
-
-  border:1px solid #4b3b89;
-
-  background:#211a42;
-
-  color:#c8baff;
-}
-
-/* =========================================
-   MODAL
-========================================= */
-
-.modal{
-  position:fixed;
-
-  inset:0;
-
-  z-index:1000;
-
-  display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
-  background:#02030dcc;
-
-  backdrop-filter:blur(9px);
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:min(520px,100%);
-
-  padding:25px;
-
-  border-radius:23px;
-
-  border:1px solid #4c588a;
-
-  background:#11152e;
-
-  box-shadow:0 30px 90px #000c;
-}
-
-.modal-box h2{
-  margin-bottom:14px;
-}
-
-.modal-box p{
-  color:#aab3d3;
-
-  line-height:1.8;
-
-  font-size:14px;
-}
-
-.close-modal{
-  width:100%;
-
-  height:46px;
-
-  margin-top:18px;
-
-  border:0;
-
+.controlBtn{
+  min-width:75px;
+  border:1px solid #5b3871;
+  background:#241331;
+  color:white;
+  padding:12px 17px;
   border-radius:12px;
-
-  background:#252e59;
-
-  color:#fff;
-
   cursor:pointer;
 }
 
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media(max-width:850px){
-
-  .game-grid{
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-  .hud{
-    grid-template-columns:
-      repeat(3,1fr);
-  }
-
+.spin{
+  min-width:160px;
+  font-size:20px;
+  font-weight:1000;
+  background:linear-gradient(135deg,#6d28d9,#a855f7,#7c3aed);
+  border:1px solid #d8b4fe;
+  box-shadow:0 0 25px rgba(168,85,247,.35);
 }
 
-@media(max-width:600px){
+.controlBtn:hover{
+  filter:brightness(1.25);
+}
 
-  .topbar{
-    height:62px;
-    padding:0 13px;
+/* MESSAGE */
+
+.message{
+  min-height:45px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#d8cbe5;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+/* DRAGON */
+
+.awaken{
+  max-width:760px;
+  margin:0 auto 15px;
+  padding:12px;
+  border-radius:15px;
+  background:#0d0712;
+  border:1px solid #54276e;
+}
+
+.awakenHeader{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:7px;
+}
+
+.awakenBar{
+  height:15px;
+  background:#241528;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.awakenFill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#7c3aed,#c084fc,#ffd166);
+  box-shadow:0 0 20px #a855f7;
+  transition:.5s;
+}
+
+/* BOSS */
+
+.boss{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:20;
+  align-items:center;
+  justify-content:center;
+  background:rgba(8,2,14,.88);
+  backdrop-filter:blur(10px);
+}
+
+.boss.show{
+  display:flex;
+}
+
+.bossBox{
+  width:min(700px,90%);
+  padding:35px;
+  text-align:center;
+  border-radius:28px;
+  border:2px solid #c084fc;
+  background:
+    radial-gradient(circle,#4c1d70,#12051b 70%);
+  box-shadow:0 0 100px rgba(168,85,247,.6);
+  animation:bossPop .7s cubic-bezier(.2,1.5,.4,1);
+}
+
+@keyframes bossPop{
+  from{
+    opacity:0;
+    transform:scale(.3) rotate(-5deg);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.bossDragon{
+  font-size:150px;
+  animation:dragonFloat 1.5s infinite ease-in-out;
+}
+
+@keyframes dragonFloat{
+  50%{
+    transform:translateY(-15px) scale(1.04);
+  }
+}
+
+.bossBox h2{
+  font-size:42px;
+  color:#e9d5ff;
+  text-shadow:0 0 20px #a855f7;
+}
+
+.bossBox p{
+  color:#d8cbe5;
+  margin:10px 0 20px;
+}
+
+.closeBoss{
+  border:0;
+  padding:12px 25px;
+  border-radius:12px;
+  color:white;
+  font-weight:bold;
+  background:linear-gradient(90deg,#7c3aed,#a855f7);
+  cursor:pointer;
+}
+
+/* FOOTER */
+
+.footer{
+  text-align:center;
+  color:#6f607a;
+  font-size:12px;
+  margin-top:45px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px){
+  .games{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:700px){
+  .header{
+    height:auto;
+    flex-wrap:wrap;
   }
 
-  .logo{
-    font-size:16px;
+  .nav{
+    order:3;
+    width:100%;
+    justify-content:center;
   }
 
-  .logo-gem{
-    width:31px;
-    height:31px;
+  .hero{
+    padding:25px;
+    min-height:230px;
   }
 
-  .lobby{
-    padding:
-      28px
-      12px
-      50px;
+  .hero h1{
+    font-size:42px;
   }
 
-  .game-grid{
-    grid-template-columns:1fr;
-  }
-
-  .game{
-    padding:
-      14px
-      7px
-      40px;
-  }
-
-  .machine{
-    padding:12px;
-    border-radius:22px;
-  }
-
-  .hud{
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-  .hud-box{
-    min-height:55px;
-  }
-
-  .hud-value{
-    font-size:17px;
-  }
-
-  .board-shell{
-    padding:6px;
+  .games{
+    grid-template-columns:repeat(2,1fr);
   }
 
   .board{
-    gap:4px;
-    padding:5px;
-    border-radius:13px;
+    grid-template-columns:repeat(5,1fr);
   }
 
-  .cell{
-    border-radius:8px;
+  .symbol{
+    font-size:30px;
+  }
+}
+
+@media(max-width:430px){
+  .app{
+    width:96%;
   }
 
-  .controls{
+  .games{
     grid-template-columns:1fr;
   }
 
-  .spin-btn{
-    order:-1;
+  .board{
+    grid-template-columns:repeat(4,1fr);
   }
 
+  .symbol{
+    font-size:27px;
+  }
+
+  .logo{
+    font-size:24px;
+  }
+
+  .balance{
+    margin-left:auto;
+  }
 }
 </style>
 </head>
 
-
 <body>
 
-<div id="stars"></div>
+<div class="app">
 
+  <!-- HEADER -->
+  <header class="header">
 
-<!-- ======================================
-     HEADER
-====================================== -->
-
-<header class="topbar">
-
-  <div class="logo">
-
-    <div class="logo-gem"></div>
-
-    <div>
-      CRYSTAL
-      <span>KINGDOM</span>
+    <div class="logo">
+      SLLOT<span>888</span>
     </div>
 
-  </div>
+    <nav class="nav">
+      <button onclick="showLobby()">HOME</button>
+      <button onclick="scrollGames()">GAMES</button>
+      <button onclick="showBonus()">BONUS</button>
+    </nav>
 
-  <div class="top-actions">
+    <div class="balance">
+      <span class="coin">🪙</span>
+      <strong id="balance">10,000</strong>
+    </div>
 
-    <button
-      class="icon-btn"
-      onclick="openHowTo()">
-      ?
-    </button>
-
-    <button
-      class="icon-btn"
-      id="soundBtn"
-      onclick="toggleSound()">
-      🔊
-    </button>
-
-  </div>
-
-</header>
+  </header>
 
 
-<!-- ======================================
-     LOBBY
-====================================== -->
+  <!-- LOBBY -->
 
-<section
-  class="lobby"
-  id="lobby">
+  <main id="lobby">
 
-  <div class="hero">
+    <section class="hero">
 
-    <h1>CRYSTAL KINGDOM</h1>
+      <div class="heroText">
 
-    <p>
-      Match • Break • Cascade • Free Spins
-    </p>
+        <small>WELCOME TO</small>
 
-  </div>
-
-
-  <div class="game-grid">
-
-
-    <div
-      class="game-card"
-      onclick="startGame()">
-
-      <div
-        class="card-art"
-        style="
-        --art:
-        radial-gradient(
-          circle at 50% 20%,
-          #3c65ff,
-          #111744 65%,
-          #090b1d
-        );">
-
-        <div class="card-crystal"></div>
-        <div class="card-crystal small"></div>
-        <div class="card-crystal small2"></div>
-
-      </div>
-
-      <div class="card-info">
-
-        <h3>
-          Crystal Kingdom
-        </h3>
+        <h1>
+          SLLOT<span>888</span>
+        </h1>
 
         <p>
-          Match • Cascade • Free Spin
+          โลกแห่งเกมแฟนตาซีสีม่วง
+          รวมเกม Mahjong, Cave Girls,
+          Lucky Cat, Dragon Awakening
+          และ Treasure ไว้ในที่เดียว
         </p>
 
       </div>
 
+    </section>
+
+
+    <div class="sectionTitle">
+      <h2>🎮 GAME COLLECTION</h2>
+      <span>CHOOSE YOUR ADVENTURE</span>
     </div>
 
 
-    <div class="game-card">
+    <section class="games" id="games">
 
-      <div
-        class="card-art"
-        style="
-        --art:
-        linear-gradient(
-          135deg,
-          #211436,
-          #712e8d,
-          #15102d
-        );">
+      <!-- MAHJONG -->
 
-        <div
-          class="card-crystal"
-          style="
-          background:
-          linear-gradient(
-            135deg,
-            #fff,
-            #d65aff,
-            #6d23a5
-          );">
+      <article class="card" onclick="openGame('mahjong')">
+
+        <div class="cardArt">
+          🀄
         </div>
 
-      </div>
+        <div class="cardInfo">
+          <h3>MAHJONG</h3>
+          <p>Ancient Chinese Mahjong</p>
 
-      <div class="card-info">
-
-        <h3>Moon Temple</h3>
-
-        <p>
-          Coming Soon
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="game-card">
-
-      <div
-        class="card-art"
-        style="
-        --art:
-        linear-gradient(
-          135deg,
-          #062c29,
-          #078765,
-          #071923
-        );">
-
-        <div
-          class="card-crystal"
-          style="
-          background:
-          linear-gradient(
-            135deg,
-            #fff,
-            #59ffbd,
-            #07926c
-          );">
+          <button class="play">
+            PLAY NOW
+          </button>
         </div>
 
-      </div>
-
-      <div class="card-info">
-
-        <h3>Emerald Wilds</h3>
-
-        <p>
-          Coming Soon
-        </p>
-
-      </div>
-
-    </div>
+      </article>
 
 
-    <div class="game-card">
+      <!-- CAVE GIRLS -->
 
-      <div
-        class="card-art"
-        style="
-        --art:
-        linear-gradient(
-          135deg,
-          #41220c,
-          #b65a0c,
-          #25100a
-        );">
+      <article class="card" onclick="openGame('cave')">
 
-        <div
-          class="card-crystal"
-          style="
-          background:
-          linear-gradient(
-            135deg,
-            #fff,
-            #ffe06a,
-            #e68a16
-          );">
+        <div class="cardArt">
+          👩‍🦰
         </div>
 
-      </div>
+        <div class="cardInfo">
+          <h3>CAVE GIRLS</h3>
+          <p>Adventure in the Ancient Cave</p>
 
-      <div class="card-info">
-
-        <h3>Solar Citadel</h3>
-
-        <p>
-          Coming Soon
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="game-card">
-
-      <div
-        class="card-art"
-        style="
-        --art:
-        linear-gradient(
-          135deg,
-          #120d31,
-          #432b99,
-          #08091e
-        );">
-
-        <div
-          class="card-crystal"
-          style="
-          background:
-          linear-gradient(
-            135deg,
-            #fff,
-            #ad6cff,
-            #4c27bd
-          );">
+          <button class="play">
+            PLAY NOW
+          </button>
         </div>
 
-      </div>
-
-      <div class="card-info">
-
-        <h3>Abyss Vault</h3>
-
-        <p>
-          Coming Soon
-        </p>
-
-      </div>
-
-    </div>
+      </article>
 
 
-    <div class="game-card">
+      <!-- LUCKY CAT -->
 
-      <div
-        class="card-art"
-        style="
-        --art:
-        linear-gradient(
-          135deg,
-          #092c46,
-          #177c91,
-          #160d3e
-        );">
+      <article class="card" onclick="openGame('cat')">
 
-        <div
-          class="card-crystal"
-          style="
-          background:
-          linear-gradient(
-            135deg,
-            #fff,
-            #7ceaff,
-            #7258ff
-          );">
+        <div class="cardArt">
+          🐱
         </div>
 
+        <div class="cardInfo">
+          <h3>LUCKY CAT</h3>
+          <p>Japanese Fortune Adventure</p>
+
+          <button class="play">
+            PLAY NOW
+          </button>
+        </div>
+
+      </article>
+
+
+      <!-- DRAGON -->
+
+      <article class="card" onclick="openGame('dragon')">
+
+        <div class="cardArt">
+          🐉
+        </div>
+
+        <div class="cardInfo">
+          <h3>DRAGON AWAKENING</h3>
+          <p>Break More — Wake Mother Dragon</p>
+
+          <button class="play">
+            PLAY NOW
+          </button>
+        </div>
+
+      </article>
+
+
+      <!-- TREASURE -->
+
+      <article class="card" onclick="openGame('treasure')">
+
+        <div class="cardArt">
+          💰
+        </div>
+
+        <div class="cardInfo">
+          <h3>TREASURE</h3>
+          <p>Find the Ancient Treasure</p>
+
+          <button class="play">
+            PLAY NOW
+          </button>
+        </div>
+
+      </article>
+
+    </section>
+
+  </main>
+
+
+  <!-- GAME -->
+
+  <section id="gameScreen" class="gameScreen">
+
+    <div class="gameTop">
+
+      <button class="back" onclick="showLobby()">
+        ← BACK
+      </button>
+
+      <div class="gameTitle" id="gameTitle">
+        GAME
       </div>
 
-      <div class="card-info">
-
-        <h3>Aurora Palace</h3>
-
-        <p>
-          Coming Soon
-        </p>
-
-      </div>
+      <div></div>
 
     </div>
 
-  </div>
 
-</section>
-
-
-<!-- ======================================
-     GAME
-====================================== -->
-
-<section
-  class="game"
-  id="game">
-
-  <div class="game-wrap">
-
-    <button
-      class="back"
-      onclick="backLobby()">
-      ← Back to Kingdom
-    </button>
-
-
-    <div class="machine">
-
-
-      <div class="machine-title">
-
-        <small>
-          MAGICAL CASCADE
-        </small>
-
-        <h2>
-          Crystal Kingdom
-        </h2>
-
-      </div>
-
-
-      <!-- HUD -->
+    <div class="gameArea">
 
       <div class="hud">
 
-
-        <div class="hud-box">
-
-          <div class="hud-label">
-            Credits
-          </div>
-
-          <div
-            class="hud-value"
-            id="credits">
-            1000
-          </div>
-
+        <div class="hudBox">
+          <small>BALANCE</small>
+          <strong id="gameBalance">10,000</strong>
         </div>
 
-
-        <div class="hud-box">
-
-          <div class="hud-label">
-            Bet
-          </div>
-
-          <div
-            class="hud-value"
-            id="betDisplay">
-            10
-          </div>
-
+        <div class="hudBox">
+          <small>BET</small>
+          <strong id="bet">20</strong>
         </div>
 
-
-        <div class="hud-box">
-
-          <div class="hud-label">
-            Cascade
-          </div>
-
-          <div
-            class="hud-value"
-            id="cascadeDisplay">
-            0
-          </div>
-
+        <div class="hudBox">
+          <small>WIN</small>
+          <strong id="win">0</strong>
         </div>
 
-
-        <div class="hud-box">
-
-          <div class="hud-label">
-            Round Win
-          </div>
-
-          <div
-            class="hud-value"
-            id="winDisplay">
-            0
-          </div>
-
-        </div>
-
-
-        <div class="hud-box">
-
-          <div class="hud-label">
-            Free Spins
-          </div>
-
-          <div
-            class="hud-value"
-            id="freeSpinDisplay">
-            0
-          </div>
-
-        </div>
-
-
-      </div>
-
-
-      <!-- BOARD -->
-
-      <div class="board-shell">
-
-        <div
-          class="board"
-          id="board">
-
+        <div class="hudBox">
+          <small>COMBO</small>
+          <strong id="combo">x0</strong>
         </div>
 
       </div>
 
 
-      <!-- MAIN CONTROLS -->
+      <!-- DRAGON METER -->
+
+      <div id="dragonMeter" class="awaken">
+
+        <div class="awakenHeader">
+          <strong>🐉 MOTHER DRAGON AWAKENING</strong>
+          <strong id="meterText">0%</strong>
+        </div>
+
+        <div class="awakenBar">
+          <div id="meterFill" class="awakenFill"></div>
+        </div>
+
+      </div>
+
+
+      <div id="board" class="board"></div>
+
+
+      <div id="message" class="message">
+        กด SPIN เพื่อเริ่มเกม
+      </div>
+
 
       <div class="controls">
 
-        <button
-          class="control-btn"
-          onclick="changeBet(-5)">
-          BET −
+        <button class="controlBtn" onclick="changeBet(-10)">
+          BET -
         </button>
 
-
-        <button
-          class="control-btn spin-btn"
-          id="spinBtn"
-          onclick="spin()">
-          SPIN
-        </button>
-
-
-        <button
-          class="control-btn"
-          onclick="changeBet(5)">
+        <button class="controlBtn" onclick="changeBet(10)">
           BET +
         </button>
 
-      </div>
-
-
-      <!-- SECOND CONTROLS -->
-
-      <div
-        class="controls"
-        style="
-        grid-template-columns:
-        1fr 1fr 1fr;
-        margin-top:10px;">
-
-        <button
-          class="control-btn"
-          id="autoBtn"
-          onclick="toggleAuto()">
-          AUTO SPIN
+        <button class="controlBtn">
+          AUTO
         </button>
 
-
-        <button
-          class="control-btn free-btn"
-          id="freeSpinBtn"
-          onclick="startFreeSpins()">
-          FREE SPIN ×10
-        </button>
-
-
-        <button
-          class="control-btn"
-          onclick="resetGame()">
-          RESET
+        <button class="controlBtn spin" onclick="spin()">
+          ⚡ SPIN
         </button>
 
       </div>
-
-
-      <!-- BET -->
-
-      <div class="bet-row">
-
-        <span>
-          Bet:
-        </span>
-
-        <button
-          class="bet-btn"
-          onclick="changeBet(-1)">
-          −
-        </button>
-
-        <div
-          class="bet-number"
-          id="betText">
-          10
-        </div>
-
-        <button
-          class="bet-btn"
-          onclick="changeBet(1)">
-          +
-        </button>
-
-      </div>
-
-
-      <div class="info">
-
-        จับคู่คริสตัล 3 ชิ้นขึ้นไป
-        ในแนวนอนหรือแนวตั้ง
-
-        <br>
-
-        คริสตัลที่ชนะจะถูกทำลาย
-        ตัวด้านบนจะตกลงมา
-        และเติมตัวใหม่
-
-        <br>
-
-        <b>
-          FREE SCATTER 3 อัน
-          = FREE SPIN 10 รอบ
-        </b>
-
-        <div class="cascade-badge">
-          CASCADE MULTIPLIER ACTIVE
-        </div>
-
-      </div>
-
 
     </div>
 
-  </div>
-
-</section>
+  </section>
 
 
-<!-- ======================================
-     MODAL
-====================================== -->
+  <footer class="footer">
+    SLLOT888 • Fantasy Game Collection • Demo Version
+  </footer>
 
-<div
-  class="modal"
-  id="modal">
+</div>
 
-  <div class="modal-box">
+
+<!-- MOTHER DRAGON POPUP -->
+
+<div id="boss" class="boss">
+
+  <div class="bossBox">
+
+    <div class="bossDragon">
+      🐉
+    </div>
 
     <h2>
-      How to Play
+      MOTHER DRAGON
     </h2>
 
     <p>
-
-      จับคู่คริสตัลที่เหมือนกัน
-      อย่างน้อย 3 ชิ้น
-      ในแนวนอนหรือแนวตั้ง
-
-      <br><br>
-
-      เมื่อเกิด Win
-      คริสตัลจะระเบิดออก
-      จากนั้นคริสตัลด้านบน
-      จะตกลงมาและเติมตัวใหม่
-
-      <br><br>
-
-      Cascade จะทำงานต่อเนื่อง
-      จนกว่าจะไม่มีชุดที่ชนะ
-
-      <br><br>
-
-      <b>
-        FREE SCATTER 3 อัน
-        จะปลดล็อก FREE SPIN 10 รอบ
-      </b>
-
-      <br><br>
-
-      Free Spin จะไม่หักเครดิต
-
-      <br><br>
-
-      <b>
-        DEMO ONLY — ไม่มีเงินจริง
-      </b>
-
+      🔥 THE MOTHER DRAGON AWAKENS! 🔥
+      <br>
+      โบนัสพิเศษกำลังเริ่มต้น
     </p>
 
-
-    <button
-      class="close-modal"
-      onclick="closeHowTo()">
-      CLOSE
+    <button class="closeBoss" onclick="closeBoss()">
+      ENTER DRAGON RAGE
     </button>
 
   </div>
@@ -2233,2060 +942,599 @@ button{
 
 <script>
 
-/* =========================================
-   CONFIG
-========================================= */
+/* =========================
+   SLLOT888 GAME ENGINE
+========================= */
 
-const ROWS = 3;
-const COLS = 5;
+let balance = 10000;
+let bet = 20;
+let win = 0;
+let combo = 0;
 
-const TYPES = [
-  "blue",
-  "pink",
-  "green",
-  "red",
-  "gold",
-  "purple"
-];
+let currentGame = "";
+let selected = null;
+let busy = false;
 
-const SCATTER = "scatter";
+let dragonMeter = 0;
 
-const SCATTER_CHANCE = 0.12;
+const games = {
 
+  mahjong:{
+    title:"🀄 MAHJONG",
+    symbols:["🀄","🀅","🀆","🀇","🀈","🀉","🪙","🏮"]
+  },
 
-/* =========================================
-   STATE
-========================================= */
+  cave:{
+    title:"👩 CAVE GIRLS",
+    symbols:["👩","🪨","🔥","🦴","💰","🦖","💎","🗿"]
+  },
 
-let board = [];
+  cat:{
+    title:"🐱 LUCKY CAT",
+    symbols:["🐱","🧧","🪙","🏮","🎋","🐟","💰","⭐"]
+  },
 
-let credits = 1000;
+  dragon:{
+    title:"🐉 DRAGON AWAKENING",
+    symbols:["🐉","🔥","🥚","💰","🪙","👑","⚔️","🐲"]
+  },
 
-let bet = 10;
-
-let cascade = 0;
-
-let roundWin = 0;
-
-let freeSpins = 0;
-
-let freeSpinMode = false;
-
-let spinning = false;
-
-let autoSpin = false;
-
-let soundOn = true;
-
-let audioCtx = null;
-
-
-/* =========================================
-   DOM READY
-========================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  ()=>{
-
-    createStars();
-
-    createBoard();
-
-    updateHUD();
-
-    updateFreeSpinHUD();
-
+  treasure:{
+    title:"💰 TREASURE",
+    symbols:["💰","🪙","💎","🗝️","🏆","📜","👑","⚓"]
   }
-);
+
+};
 
 
-/* =========================================
-   STARS
-========================================= */
+/* =========================
+   LOBBY
+========================= */
 
-function createStars(){
+function showLobby(){
 
-  const container =
-    document.getElementById("stars");
+  document.getElementById("lobby").style.display="block";
 
-  for(let i=0;i<90;i++){
-
-    const star =
-      document.createElement("div");
-
-    star.className="star-dot";
-
-    star.style.left =
-      Math.random()*100+"%";
-
-    star.style.top =
-      Math.random()*100+"%";
-
-    star.style.animationDelay =
-      Math.random()*3+"s";
-
-    container.appendChild(star);
-
-  }
+  document
+    .getElementById("gameScreen")
+    .classList.remove("active");
 
 }
 
+function scrollGames(){
 
-/* =========================================
-   RANDOM TYPE
-========================================= */
-
-function randomType(){
-
-  if(
-    Math.random() <
-    SCATTER_CHANCE
-  ){
-
-    return SCATTER;
-
-  }
-
-  return TYPES[
-    Math.floor(
-      Math.random()*TYPES.length
-    )
-  ];
+  document
+    .getElementById("games")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
 
 }
 
-
-/* =========================================
-   CREATE BOARD
-========================================= */
-
-function createBoard(){
-
-  board=[];
-
-  for(
-    let r=0;
-    r<ROWS;
-    r++
-  ){
-
-    const row=[];
-
-    for(
-      let c=0;
-      c<COLS;
-      c++
-    ){
-
-      row.push(
-        randomNormalType()
-      );
-
-    }
-
-    board.push(row);
-
-  }
-
-
-  /*
-    ป้องกัน Match ตั้งแต่เริ่ม
-  */
-
-  let tries=0;
-
-  while(
-    findMatches().length &&
-    tries<100
-  ){
-
-    for(
-      let r=0;
-      r<ROWS;
-      r++
-    ){
-
-      for(
-        let c=0;
-        c<COLS;
-        c++
-      ){
-
-        board[r][c]=
-          randomNormalType();
-
-      }
-
-    }
-
-    tries++;
-
-  }
-
-
-  renderBoard();
-
-}
-
-
-/* =========================================
-   RANDOM NORMAL
-========================================= */
-
-function randomNormalType(){
-
-  return TYPES[
-    Math.floor(
-      Math.random()*TYPES.length
-    )
-  ];
-
-}
-
-
-/* =========================================
-   CELL HTML
-========================================= */
-
-function cellHTML(type){
-
-  if(type===SCATTER){
-
-    return `
-
-      <div class="gem scatter">
-
-        <div class="scatter-core">
-          FREE
-        </div>
-
-        <div
-          class="scatter-spark"
-          style="
-          left:12%;
-          top:17%;">
-        </div>
-
-        <div
-          class="scatter-spark"
-          style="
-          right:12%;
-          top:26%;">
-        </div>
-
-        <div
-          class="scatter-spark"
-          style="
-          left:21%;
-          bottom:15%;">
-        </div>
-
-        <div
-          class="scatter-spark"
-          style="
-          right:20%;
-          bottom:19%;">
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  return `
-    <div class="gem ${type}"></div>
-  `;
-
-}
-
-
-/* =========================================
-   RENDER
-========================================= */
-
-function renderBoard(falling=false){
-
-  const boardEl =
-    document.getElementById("board");
-
-  boardEl.innerHTML="";
-
-
-  for(
-    let r=0;
-    r<ROWS;
-    r++
-  ){
-
-    for(
-      let c=0;
-      c<COLS;
-      c++
-    ){
-
-      const cell =
-        document.createElement("div");
-
-      cell.className="cell";
-
-      if(falling){
-        cell.classList.add("falling");
-      }
-
-      cell.dataset.r=r;
-      cell.dataset.c=c;
-
-      cell.innerHTML =
-        cellHTML(board[r][c]);
-
-      boardEl.appendChild(cell);
-
-    }
-
-  }
-
-
-  const banner =
-    document.createElement("div");
-
-  banner.className="win-banner";
-
-  banner.id="winBanner";
-
-  banner.textContent="WIN!";
-
-  boardEl.appendChild(banner);
-
-}
-
-
-/* =========================================
-   FIND MATCHES
-========================================= */
-
-function findMatches(){
-
-  const found =
-    new Set();
-
-
-  /*
-    HORIZONTAL
-  */
-
-  for(
-    let r=0;
-    r<ROWS;
-    r++
-  ){
-
-    let start=0;
-
-    while(start<COLS){
-
-      if(
-        board[r][start]===null ||
-        board[r][start]===SCATTER
-      ){
-
-        start++;
-        continue;
-
-      }
-
-      let end=start+1;
-
-      while(
-        end<COLS &&
-        board[r][end]===board[r][start]
-      ){
-
-        end++;
-
-      }
-
-
-      if(
-        end-start>=3
-      ){
-
-        for(
-          let c=start;
-          c<end;
-          c++
-        ){
-
-          found.add(
-            `${r},${c}`
-          );
-
-        }
-
-      }
-
-      start=end;
-
-    }
-
-  }
-
-
-  /*
-    VERTICAL
-  */
-
-  for(
-    let c=0;
-    c<COLS;
-    c++
-  ){
-
-    let start=0;
-
-    while(start<ROWS){
-
-      if(
-        board[start][c]===null ||
-        board[start][c]===SCATTER
-      ){
-
-        start++;
-        continue;
-
-      }
-
-      let end=start+1;
-
-      while(
-        end<ROWS &&
-        board[end][c]===board[start][c]
-      ){
-
-        end++;
-
-      }
-
-
-      if(
-        end-start>=3
-      ){
-
-        for(
-          let r=start;
-          r<end;
-          r++
-        ){
-
-          found.add(
-            `${r},${c}`
-          );
-
-        }
-
-      }
-
-      start=end;
-
-    }
-
-  }
-
-
-  return [...found].map(
-    value=>{
-
-      const [
-        r,
-        c
-      ] =
-        value
-        .split(",")
-        .map(Number);
-
-      return {
-        r,
-        c
-      };
-
-    }
+function showBonus(){
+
+  alert(
+    "🎁 BONUS CENTER\n\n"+
+    "กำลังเตรียมระบบ Bonus ของ SLLOT888"
   );
 
 }
 
 
-/* =========================================
-   SCATTER COUNT
-========================================= */
+/* =========================
+   OPEN GAME
+========================= */
 
-function countScatters(){
+function openGame(name){
 
-  let count=0;
+  currentGame=name;
 
-  for(
-    let r=0;
-    r<ROWS;
-    r++
-  ){
+  document.getElementById("lobby").style.display="none";
 
-    for(
-      let c=0;
-      c<COLS;
-      c++
-    ){
+  document
+    .getElementById("gameScreen")
+    .classList.add("active");
 
-      if(
-        board[r][c]===SCATTER
-      ){
+  document.getElementById("gameTitle").textContent=
+    games[name].title;
 
-        count++;
+  if(name==="dragon"){
 
-      }
-
-    }
-
-  }
-
-  return count;
-
-}
-
-
-/* =========================================
-   TRIGGER FREE SPIN
-========================================= */
-
-function checkFreeSpinTrigger(){
-
-  const count =
-    countScatters();
-
-
-  if(count<3){
-
-    return false;
-
-  }
-
-
-  const cells =
-    document.querySelectorAll(
-      ".cell"
-    );
-
-
-  /*
-    Highlight Scatter
-  */
-
-  for(
-    let r=0;
-    r<ROWS;
-    r++
-  ){
-
-    for(
-      let c=0;
-      c<COLS;
-      c++
-    ){
-
-      if(
-        board[r][c]===SCATTER
-      ){
-
-        const index =
-          r*COLS+c;
-
-        if(cells[index]){
-
-          cells[index]
-            .classList
-            .add("free-trigger");
-
-        }
-
-      }
-
-    }
-
-  }
-
-
-  freeSpins += 10;
-
-  freeSpinMode=true;
-
-  updateFreeSpinHUD();
-
-  showWinText(
-    "FREE SPINS!"
-  );
-
-  winSound();
-
-
-  setTimeout(
-    ()=>{
-      cells.forEach(
-        cell=>{
-          cell.classList
-            .remove(
-              "free-trigger"
-            );
-        }
-      );
-    },
-    1200
-  );
-
-
-  return true;
-
-}
-
-
-/* =========================================
-   PARTICLES
-========================================= */
-
-function spawnParticles(
-  x,
-  y,
-  amount=16
-){
-
-  for(
-    let i=0;
-    i<amount;
-    i++
-  ){
-
-    const p =
-      document.createElement(
-        "div"
-      );
-
-    p.className="particle";
-
-    p.style.left=x+"px";
-
-    p.style.top=y+"px";
-
-
-    const angle =
-      Math.random() *
-      Math.PI*2;
-
-    const distance =
-      35 +
-      Math.random()*100;
-
-
-    p.style.setProperty(
-      "--x",
-      Math.cos(angle)*
-      distance+"px"
-    );
-
-    p.style.setProperty(
-      "--y",
-      Math.sin(angle)*
-      distance+"px"
-    );
-
-
-    document.body.appendChild(p);
-
-
-    setTimeout(
-      ()=>{
-        p.remove();
-      },
-      850
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   MATCH PARTICLES
-========================================= */
-
-function matchParticles(matches){
-
-  const cells =
-    document.querySelectorAll(
-      ".cell"
-    );
-
-
-  matches.forEach(
-    ({r,c})=>{
-
-      const index =
-        r*COLS+c;
-
-      const cell =
-        cells[index];
-
-      if(!cell) return;
-
-
-      const rect =
-        cell.getBoundingClientRect();
-
-
-      spawnParticles(
-        rect.left+
-        rect.width/2,
-
-        rect.top+
-        rect.height/2,
-
-        10
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================
-   WIN TEXT
-========================================= */
-
-function showWinText(text){
-
-  const banner =
-    document.getElementById(
-      "winBanner"
-    );
-
-  if(!banner) return;
-
-
-  banner.textContent=text;
-
-  banner.classList.remove(
-    "show"
-  );
-
-
-  void banner.offsetWidth;
-
-
-  banner.classList.add(
-    "show"
-  );
-
-}
-
-
-/* =========================================
-   SOUND
-========================================= */
-
-function beep(
-  frequency=440,
-  duration=.08
-){
-
-  if(!soundOn) return;
-
-
-  try{
-
-    if(!audioCtx){
-
-      audioCtx =
-        new (
-          window.AudioContext ||
-          window.webkitAudioContext
-        )();
-
-    }
-
-
-    const osc =
-      audioCtx.createOscillator();
-
-    const gain =
-      audioCtx.createGain();
-
-
-    osc.type="sine";
-
-    osc.frequency.value =
-      frequency;
-
-
-    gain.gain.setValueAtTime(
-      .045,
-      audioCtx.currentTime
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-      .001,
-      audioCtx.currentTime+
-      duration
-    );
-
-
-    osc.connect(gain);
-
-    gain.connect(
-      audioCtx.destination
-    );
-
-
-    osc.start();
-
-    osc.stop(
-      audioCtx.currentTime+
-      duration
-    );
-
-  }catch(e){}
-
-}
-
-
-function winSound(){
-
-  beep(520,.08);
-
-  setTimeout(
-    ()=>beep(660,.08),
-    80
-  );
-
-  setTimeout(
-    ()=>beep(820,.12),
-    160
-  );
-
-}
-
-
-/* =========================================
-   SOUND TOGGLE
-========================================= */
-
-function toggleSound(){
-
-  soundOn=!soundOn;
-
-
-  document.getElementById(
-    "soundBtn"
-  ).textContent =
-    soundOn
-      ? "🔊"
-      : "🔇";
-
-}
-
-
-/* =========================================
-   REMOVE MATCHES
-========================================= */
-
-async function removeMatches(
-  matches
-){
-
-  const cells =
-    document.querySelectorAll(
-      ".cell"
-    );
-
-
-  matches.forEach(
-    ({r,c})=>{
-
-      const index =
-        r*COLS+c;
-
-      if(cells[index]){
-
-        cells[index]
-          .classList
-          .add("win");
-
-      }
-
-    }
-  );
-
-
-  matchParticles(matches);
-
-  winSound();
-
-
-  await wait(420);
-
-
-  matches.forEach(
-    ({r,c})=>{
-
-      const index =
-        r*COLS+c;
-
-      if(cells[index]){
-
-        cells[index]
-          .classList
-          .add("removing");
-
-      }
-
-    }
-  );
-
-
-  await wait(420);
-
-
-  matches.forEach(
-    ({r,c})=>{
-
-      board[r][c]=null;
-
-    }
-  );
-
-}
-
-
-/* =========================================
-   COLLAPSE
-========================================= */
-
-async function collapseBoard(){
-
-  for(
-    let c=0;
-    c<COLS;
-    c++
-  ){
-
-    const survivors=[];
-
-
-    /*
-      อ่านจากล่างขึ้นบน
-    */
-
-    for(
-      let r=ROWS-1;
-      r>=0;
-      r--
-    ){
-
-      if(
-        board[r][c]!==null
-      ){
-
-        survivors.push(
-          board[r][c]
-        );
-
-      }
-
-    }
-
-
-    /*
-      เติมของใหม่
-    */
-
-    while(
-      survivors.length<ROWS
-    ){
-
-      survivors.push(
-        randomType()
-      );
-
-    }
-
-
-    survivors.reverse();
-
-
-    for(
-      let r=0;
-      r<ROWS;
-      r++
-    ){
-
-      board[r][c]=
-        survivors[r];
-
-    }
-
-  }
-
-
-  renderBoard(true);
-
-
-  await wait(470);
-
-}
-
-
-/* =========================================
-   PAYOUT
-========================================= */
-
-function calculateWin(
-  matchCount
-){
-
-  const base =
-    matchCount *
-    bet *
-    2;
-
-
-  /*
-    Cascade ยิ่งลึก
-    multiplier จะลดลง
-  */
-
-  const multiplier =
-    Math.max(
-      .28,
-      1 -
-      (cascade-1)*
-      .12
-    );
-
-
-  return Math.max(
-    1,
-    Math.floor(
-      base*multiplier
-    )
-  );
-
-}
-
-
-/* =========================================
-   CASCADE ROUND
-========================================= */
-
-async function cascadeRound(){
-
-  const matches =
-    findMatches();
-
-
-  if(
-    matches.length===0
-  ){
-
-    return false;
-
-  }
-
-
-  cascade++;
-
-
-  document.getElementById(
-    "cascadeDisplay"
-  ).textContent =
-    cascade;
-
-
-  const win =
-    calculateWin(
-      matches.length
-    );
-
-
-  roundWin += win;
-
-  credits += win;
-
-
-  document.getElementById(
-    "credits"
-  ).textContent =
-    credits;
-
-
-  document.getElementById(
-    "winDisplay"
-  ).textContent =
-    roundWin;
-
-
-  if(cascade===1){
-
-    showWinText(
-      `WIN +${win}`
-    );
+    document
+      .getElementById("dragonMeter")
+      .style.display="block";
 
   }else{
 
-    showWinText(
-      `CASCADE x${cascade}`
-    );
+    document
+      .getElementById("dragonMeter")
+      .style.display="none";
 
   }
 
+  generateBoard();
 
-  await removeMatches(
-    matches
-  );
-
-
-  await collapseBoard();
-
-
-  return true;
+  document.getElementById("message").textContent=
+    "กด SPIN เพื่อเริ่มเกม";
 
 }
 
 
-/* =========================================
-   RUN CASCADE
-========================================= */
+/* =========================
+   BOARD
+========================= */
 
-async function runCascade(){
+function generateBoard(){
 
-  let safety=0;
+  const board=
+    document.getElementById("board");
 
+  board.innerHTML="";
 
-  while(
-    safety<15
-  ){
+  let symbols=
+    games[currentGame].symbols;
 
-    const happened =
-      await cascadeRound();
+  for(let i=0;i<30;i++){
 
+    let div=
+      document.createElement("div");
 
-    if(!happened){
+    div.className="symbol";
 
-      break;
+    div.textContent=
+      symbols[
+        Math.floor(
+          Math.random()*symbols.length
+        )
+      ];
 
-    }
+    div.dataset.index=i;
 
+    div.onclick=()=>{
+      selectSymbol(div)
+    };
 
-    safety++;
-
+    board.appendChild(div);
   }
 
 }
 
 
-/* =========================================
-   REEL ANIMATION
-========================================= */
+/* =========================
+   SELECT
+========================= */
 
-async function reelAnimation(){
+function selectSymbol(el){
 
-  const boardEl =
-    document.getElementById(
-      "board"
-    );
+  if(busy)return;
 
+  if(selected===null){
 
-  boardEl.style.filter =
-    "brightness(.55)";
+    selected=el;
 
+    el.classList.add("selected");
 
-  for(
-    let i=0;
-    i<4;
-    i++
-  ){
-
-    for(
-      let r=0;
-      r<ROWS;
-      r++
-    ){
-
-      for(
-        let c=0;
-        c<COLS;
-        c++
-      ){
-
-        board[r][c]=
-          randomType();
-
-      }
-
-    }
-
-
-    renderBoard();
-
-
-    await wait(85);
+    return;
 
   }
 
+  if(selected===el){
 
-  boardEl.style.filter="";
+    el.classList.remove("selected");
 
-}
+    selected=null;
 
+    return;
 
-/* =========================================
-   CREATE MATCH
-========================================= */
+  }
 
-function createGuaranteedMatch(){
+  let all=
+    [...document.querySelectorAll(".symbol")];
 
-  /*
-    มีโอกาสสร้าง Match
-    เพื่อให้เดโมเล่นสนุกขึ้น
-  */
+  let a=
+    Number(selected.dataset.index);
+
+  let b=
+    Number(el.dataset.index);
+
+  let rowA=
+    Math.floor(a/6);
+
+  let colA=
+    a%6;
+
+  let rowB=
+    Math.floor(b/6);
+
+  let colB=
+    b%6;
 
   if(
-    Math.random()<
-    .82
+    Math.abs(rowA-rowB)+
+    Math.abs(colA-colB)!==1
   ){
 
-    const type =
-      randomNormalType();
+    selected.classList.remove("selected");
 
+    selected=null;
 
-    const row =
-      Math.floor(
-        Math.random()*ROWS
-      );
-
-
-    const start =
-      Math.floor(
-        Math.random()*
-        (COLS-2)
-      );
-
-
-    board[row][start]=
-      type;
-
-    board[row][start+1]=
-      type;
-
-    board[row][start+2]=
-      type;
-
+    return;
   }
+
+  let temp=
+    selected.textContent;
+
+  selected.textContent=
+    el.textContent;
+
+  el.textContent=temp;
+
+  selected.classList.remove("selected");
+
+  selected=null;
+
+  checkMatch();
 
 }
 
 
-/* =========================================
-   CREATE SCATTERS
-========================================= */
-
-function createScatterBonus(){
-
-  /*
-    ประมาณ 42%
-    ของ Spin จะได้ Scatter 3 อัน
-    เพื่อให้ทดสอบ Free Spin ได้ง่าย
-  */
-
-  if(
-    Math.random()<.42
-  ){
-
-    const positions=[];
-
-
-    while(
-      positions.length<3
-    ){
-
-      const r =
-        Math.floor(
-          Math.random()*ROWS
-        );
-
-      const c =
-        Math.floor(
-          Math.random()*COLS
-        );
-
-
-      const key =
-        `${r}-${c}`;
-
-
-      if(
-        !positions.includes(key)
-      ){
-
-        positions.push(key);
-
-        board[r][c]=
-          SCATTER;
-
-      }
-
-    }
-
-  }
-
-}
-
-
-/* =========================================
-   NORMAL SPIN
-========================================= */
+/* =========================
+   SPIN
+========================= */
 
 async function spin(){
 
-  if(spinning){
+  if(busy)return;
+
+  if(balance<bet){
+
+    document.getElementById("message").textContent=
+      "เหรียญไม่พอ";
 
     return;
 
   }
 
+  busy=true;
 
-  /*
-    ถ้าเป็น Free Spin
-    ใช้ฟังก์ชัน Free Spin แทน
-  */
-
-  if(freeSpinMode){
-
-    return;
-
-  }
-
-
-  if(
-    credits<bet
-  ){
-
-    alert(
-      "เครดิตไม่พอครับ"
-    );
-
-    return;
-
-  }
-
-
-  spinning=true;
-
-
-  autoSpin=false;
-
-
-  document.getElementById(
-    "autoBtn"
-  ).textContent =
-    "AUTO SPIN";
-
-
-  document.getElementById(
-    "spinBtn"
-  ).disabled=true;
-
-
-  /*
-    หักเครดิตเฉพาะ Spin ปกติ
-  */
-
-  credits -= bet;
-
-
-  roundWin=0;
-
-  cascade=0;
-
+  balance-=bet;
 
   updateHUD();
 
+  document.getElementById("message").textContent=
+    "✨ กำลังหมุน...";
 
-  await reelAnimation();
+  let cells=
+    [...document.querySelectorAll(".symbol")];
 
+  for(let t=0;t<8;t++){
 
-  /*
-    สร้าง Match
-  */
+    cells.forEach(cell=>{
 
-  createGuaranteedMatch();
+      let symbols=
+        games[currentGame].symbols;
 
+      cell.textContent=
+        symbols[
+          Math.floor(
+            Math.random()*symbols.length
+          )
+        ];
 
-  /*
-    สร้าง Scatter
-  */
+    });
 
-  createScatterBonus();
-
-
-  renderBoard();
-
-
-  await wait(200);
-
-
-  /*
-    ตรวจ Free Spin
-  */
-
-  const triggered =
-    checkFreeSpinTrigger();
-
-
-  if(triggered){
-
-    await wait(1000);
+    await wait(80);
 
   }
 
-
-  /*
-    Cascade
-  */
-
-  await runCascade();
-
-
-  updateHUD();
-
-
-  spinning=false;
-
-
-  document.getElementById(
-    "spinBtn"
-  ).disabled=false;
-
-
-  /*
-    Auto Spin
-  */
-
-  if(
-    autoSpin &&
-    !freeSpinMode
-  ){
-
-    setTimeout(
-      spin,
-      650
-    );
-
-  }
+  await checkMatch(true);
 
 }
 
 
-/* =========================================
-   FREE SPIN START
-========================================= */
+/* =========================
+   MATCH
+========================= */
 
-async function startFreeSpins(){
+async function checkMatch(fromSpin=false){
 
-  if(spinning){
+  if(busy===false)
+    busy=true;
 
-    return;
+  let cells=
+    [...document.querySelectorAll(".symbol")];
 
-  }
-
-
-  if(freeSpinMode){
-
-    return;
-
-  }
-
+  let matches=[];
 
   /*
-    ปุ่ม Free Spin
-    สามารถกดทดลองระบบได้
+    Simple demo matching:
+    random groups create satisfying
+    cascade gameplay.
   */
 
-  freeSpins=10;
+  let count=
+    3+
+    Math.floor(Math.random()*5);
 
-  freeSpinMode=true;
+  let used=[];
 
+  while(used.length<count){
 
-  updateFreeSpinHUD();
-
-
-  showWinText(
-    "FREE SPINS!"
-  );
-
-
-  winSound();
-
-
-  await wait(900);
-
-
-  runFreeSpin();
-
-}
-
-
-/* =========================================
-   FREE SPIN LOOP
-========================================= */
-
-async function runFreeSpin(){
-
-  if(
-    !freeSpinMode
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    freeSpins<=0
-  ){
-
-    finishFreeSpins();
-
-    return;
-
-  }
-
-
-  freeSpins--;
-
-
-  updateFreeSpinHUD();
-
-
-  await freeSpinRound();
-
-
-  if(
-    freeSpins>0
-  ){
-
-    setTimeout(
-      runFreeSpin,
-      650
-    );
-
-  }else{
-
-    finishFreeSpins();
-
-  }
-
-}
-
-
-/* =========================================
-   FREE SPIN ROUND
-========================================= */
-
-async function freeSpinRound(){
-
-  if(spinning){
-
-    return;
-
-  }
-
-
-  spinning=true;
-
-
-  cascade=0;
-
-  roundWin=0;
-
-
-  updateHUD();
-
-
-  /*
-    หมุนโดยไม่หักเครดิต
-  */
-
-  await reelAnimation();
-
-
-  /*
-    Free Spin มี Match
-  */
-
-  createGuaranteedMatch();
-
-
-  /*
-    มีโอกาส Scatter เพิ่ม
-  */
-
-  createScatterBonus();
-
-
-  renderBoard();
-
-
-  await wait(180);
-
-
-  /*
-    Free Spin Cascade
-  */
-
-  await runCascade();
-
-
-  /*
-    โบนัส Free Spin
-  */
-
-  if(
-    roundWin>0
-  ){
-
-    const bonus =
+    let index=
       Math.floor(
-        roundWin*.25
+        Math.random()*cells.length
       );
 
-
-    credits += bonus;
-
-    roundWin += bonus;
-
-
-    showWinText(
-      `FREE BONUS +${bonus}`
-    );
-
-
-    updateHUD();
+    if(!used.includes(index))
+      used.push(index);
 
   }
 
+  used.forEach(i=>{
+    matches.push(cells[i]);
+  });
 
-  spinning=false;
+  combo++;
 
-}
+  let payout=
+    bet*
+    matches.length*
+    combo;
 
+  win+=payout;
 
-/* =========================================
-   FINISH FREE SPINS
-========================================= */
+  balance+=payout;
 
-function finishFreeSpins(){
-
-  freeSpinMode=false;
-
-  freeSpins=0;
-
-
-  updateFreeSpinHUD();
-
-
-  showWinText(
-    "FREE SPIN END"
-  );
+  matches.forEach(el=>{
+    el.classList.add("break");
+  });
 
 
-  winSound();
+  /* DRAGON */
+
+  if(currentGame==="dragon"){
+
+    dragonMeter+=
+      matches.length*8+
+      combo*2;
+
+    dragonMeter=
+      Math.min(100,dragonMeter);
+
+    updateDragonMeter();
+
+  }
 
 
   updateHUD();
 
-}
+  document.getElementById("message").textContent=
+    "💥 แตก "+matches.length+
+    " ตัว • Combo x"+combo+
+    " • WIN "+payout;
 
 
-/* =========================================
-   FREE SPIN HUD
-========================================= */
-
-function updateFreeSpinHUD(){
-
-  const display =
-    document.getElementById(
-      "freeSpinDisplay"
-    );
+  await wait(450);
 
 
-  if(display){
+  cells.forEach(el=>{
 
-    display.textContent =
-      freeSpins;
+    el.classList.remove("break");
+
+    let symbols=
+      games[currentGame].symbols;
+
+    el.textContent=
+      symbols[
+        Math.floor(
+          Math.random()*symbols.length
+        )
+      ];
+
+  });
+
+
+  await wait(250);
+
+
+  /*
+    Cascade chance
+  */
+
+  if(Math.random()<.45 && combo<6){
+
+    document.getElementById("message").textContent=
+      "🌊 CASCADE!";
+
+    busy=false;
+
+    await wait(300);
+
+    await checkMatch();
+
+    return;
 
   }
 
 
-  const btn =
-    document.getElementById(
-      "freeSpinBtn"
-    );
+  /* DRAGON AWAKEN */
 
+  if(
+    currentGame==="dragon" &&
+    dragonMeter>=100
+  ){
 
-  if(btn){
+    busy=false;
 
-    if(
-      freeSpinMode
-    ){
+    showMotherDragon();
 
-      btn.textContent =
-        `FREE SPIN ${freeSpins}`;
-
-    }else{
-
-      btn.textContent =
-        "FREE SPIN ×10";
-
-    }
+    return;
 
   }
 
-}
 
+  combo=0;
 
-/* =========================================
-   HUD
-========================================= */
+  updateHUD();
 
-function updateHUD(){
+  document.getElementById("message").textContent=
+    "✨ รอบจบแล้ว — กด SPIN อีกครั้ง";
 
-  document.getElementById(
-    "credits"
-  ).textContent =
-    credits;
-
-
-  document.getElementById(
-    "betDisplay"
-  ).textContent =
-    bet;
-
-
-  document.getElementById(
-    "betText"
-  ).textContent =
-    bet;
-
-
-  document.getElementById(
-    "cascadeDisplay"
-  ).textContent =
-    cascade;
-
-
-  document.getElementById(
-    "winDisplay"
-  ).textContent =
-    roundWin;
+  busy=false;
 
 }
 
 
-/* =========================================
+/* =========================
+   DRAGON METER
+========================= */
+
+function updateDragonMeter(){
+
+  document
+    .getElementById("meterFill")
+    .style.width=
+      dragonMeter+"%";
+
+  document
+    .getElementById("meterText")
+    .textContent=
+      dragonMeter+"%";
+
+}
+
+
+/* =========================
+   MOTHER DRAGON
+========================= */
+
+function showMotherDragon(){
+
+  document
+    .getElementById("boss")
+    .classList.add("show");
+
+  document
+    .getElementById("message")
+    .textContent=
+      "🐉 MOTHER DRAGON AWAKENED!";
+
+}
+
+
+/* =========================
+   CLOSE BOSS
+========================= */
+
+function closeBoss(){
+
+  document
+    .getElementById("boss")
+    .classList.remove("show");
+
+  /*
+    Bonus from Mother Dragon
+  */
+
+  let bonus=
+    bet*25;
+
+  balance+=bonus;
+
+  dragonMeter=0;
+
+  combo=0;
+
+  updateDragonMeter();
+
+  updateHUD();
+
+  document
+    .getElementById("message")
+    .textContent=
+      "🔥 DRAGON RAGE BONUS +"+
+      bonus+
+      " COINS!";
+
+}
+
+
+/* =========================
    BET
-========================================= */
+========================= */
 
 function changeBet(amount){
 
-  if(spinning){
+  if(busy)return;
 
-    return;
+  bet+=amount;
 
-  }
+  if(bet<10)
+    bet=10;
 
+  if(bet>500)
+    bet=500;
 
-  bet += amount;
-
-
-  if(bet<5){
-
-    bet=5;
-
-  }
-
-
-  if(bet>100){
-
-    bet=100;
-
-  }
-
-
-  updateHUD();
+  document
+    .getElementById("bet")
+    .textContent=
+      bet;
 
 }
 
 
-/* =========================================
-   AUTO SPIN
-========================================= */
+/* =========================
+   HUD
+========================= */
 
-function toggleAuto(){
+function updateHUD(){
 
-  if(freeSpinMode){
+  document
+    .getElementById("balance")
+    .textContent=
+      balance.toLocaleString();
 
-    return;
+  document
+    .getElementById("gameBalance")
+    .textContent=
+      balance.toLocaleString();
 
-  }
+  document
+    .getElementById("bet")
+    .textContent=
+      bet;
 
+  document
+    .getElementById("win")
+    .textContent=
+      win;
 
-  if(spinning){
-
-    autoSpin=false;
-
-    document.getElementById(
-      "autoBtn"
-    ).textContent =
-      "AUTO SPIN";
-
-    return;
-
-  }
-
-
-  autoSpin=!autoSpin;
-
-
-  document.getElementById(
-    "autoBtn"
-  ).textContent =
-    autoSpin
-      ? "STOP AUTO"
-      : "AUTO SPIN";
-
-
-  if(autoSpin){
-
-    spin();
-
-  }
+  document
+    .getElementById("combo")
+    .textContent=
+      "x"+combo;
 
 }
 
 
-/* =========================================
-   RESET
-========================================= */
-
-function resetGame(){
-
-  if(spinning){
-
-    return;
-
-  }
-
-
-  credits=1000;
-
-  bet=10;
-
-  cascade=0;
-
-  roundWin=0;
-
-  freeSpins=0;
-
-  freeSpinMode=false;
-
-  autoSpin=false;
-
-
-  document.getElementById(
-    "autoBtn"
-  ).textContent =
-    "AUTO SPIN";
-
-
-  createBoard();
-
-  updateHUD();
-
-  updateFreeSpinHUD();
-
-}
-
-
-/* =========================================
-   START GAME
-========================================= */
-
-function startGame(){
-
-  document.getElementById(
-    "lobby"
-  ).style.display="none";
-
-
-  document.getElementById(
-    "game"
-  ).classList.add("active");
-
-
-  createBoard();
-
-  updateHUD();
-
-  updateFreeSpinHUD();
-
-}
-
-
-/* =========================================
-   BACK
-========================================= */
-
-function backLobby(){
-
-  if(spinning){
-
-    return;
-
-  }
-
-
-  autoSpin=false;
-
-  freeSpinMode=false;
-
-  freeSpins=0;
-
-
-  document.getElementById(
-    "game"
-  ).classList.remove("active");
-
-
-  document.getElementById(
-    "lobby"
-  ).style.display="block";
-
-
-  updateFreeSpinHUD();
-
-}
-
-
-/* =========================================
-   MODAL
-========================================= */
-
-function openHowTo(){
-
-  document.getElementById(
-    "modal"
-  ).classList.add("show");
-
-}
-
-
-function closeHowTo(){
-
-  document.getElementById(
-    "modal"
-  ).classList.remove("show");
-
-}
-
-
-/* =========================================
-   WAIT
-========================================= */
+/* =========================
+   UTILITY
+========================= */
 
 function wait(ms){
 
   return new Promise(
-    resolve=>
-      setTimeout(
-        resolve,
-        ms
-      )
+    resolve=>setTimeout(resolve,ms)
   );
 
 }
 
 
-/* =========================================
-   MODAL OUTSIDE CLICK
-========================================= */
+/* =========================
+   INIT
+========================= */
 
-document.getElementById(
-  "modal"
-).addEventListener(
-  "click",
-  e=>{
-
-    if(
-      e.target.id==="modal"
-    ){
-
-      closeHowTo();
-
-    }
-
-  }
-);
-
-
-/* =========================================
-   KEYBOARD
-========================================= */
-
-document.addEventListener(
-  "keydown",
-  e=>{
-
-    if(
-      e.code==="Space"
-    ){
-
-      e.preventDefault();
-
-
-      if(
-        document.getElementById(
-          "game"
-        ).classList.contains(
-          "active"
-        )
-      ){
-
-        spin();
-
-      }
-
-    }
-
-
-    if(
-      e.code==="Escape"
-    ){
-
-      closeHowTo();
-
-    }
-
-  }
-);
+updateHUD();
 
 </script>
 
