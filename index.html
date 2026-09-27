@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Crystal Kingdom — Cascade Demo</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#070816;
+  --panel:#10142a;
+  --panel2:#171c38;
+  --line:#39447b;
+  --text:#f5f7ff;
+  --muted:#8992b8;
+  --gold:#ffd86b;
+  --cyan:#64e8ff;
+  --pink:#ff62d4;
+  --green:#64ffbd;
+}
+
+body{
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 50% 0%,#242b68 0%,transparent 35%),
+    radial-gradient(circle at 10% 80%,#25144c 0%,transparent 35%),
+    linear-gradient(145deg,#050611,#0b0d20 50%,#08091a);
+  overflow-x:hidden;
+}
+
+button{
+  font-family:inherit;
+}
+
+.app{
+  min-height:100vh;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+  height:74px;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(6,8,22,.86);
+  border-bottom:1px solid rgba(100,232,255,.14);
+  backdrop-filter:blur(18px);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.logo-icon{
+  width:40px;
+  height:40px;
+  transform:rotate(45deg);
+  border-radius:9px;
+  background:linear-gradient(135deg,#fff,#65e8ff 35%,#6a55ff 70%,#d957ff);
+  box-shadow:
+    0 0 18px #65e8ff88,
+    inset 2px 2px 5px #ffffffaa;
+  position:relative;
+}
+
+.logo-icon:after{
+  content:"";
+  position:absolute;
+  width:9px;
+  height:9px;
+  background:white;
+  border-radius:50%;
+  left:7px;
+  top:6px;
+  opacity:.85;
+}
+
+.logo span{
+  color:var(--cyan);
+}
+
+.top-actions{
+  display:flex;
+  gap:8px;
+}
+
+.icon-btn{
+  width:42px;
+  height:42px;
+  border:1px solid #39447b;
+  background:#11162d;
+  color:#dce5ff;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.icon-btn:hover{
+  border-color:var(--cyan);
+  box-shadow:0 0 15px #64e8ff33;
+}
+
+/* =========================
+   LOBBY
+========================= */
+
+.lobby{
+  max-width:1200px;
+  margin:auto;
+  padding:38px 22px 60px;
+}
+
+.hero{
+  text-align:center;
+  margin-bottom:34px;
+}
+
+.hero h1{
+  font-size:clamp(32px,6vw,64px);
+  font-weight:1000;
+  letter-spacing:-2px;
+  background:linear-gradient(90deg,#fff,#64e8ff,#d36cff,#fff);
+  background-size:250%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:shine 5s linear infinite;
+}
+
+@keyframes shine{
+  to{background-position:250%}
+}
+
+.hero p{
+  margin-top:9px;
+  color:var(--muted);
+}
+
+.game-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.game-card{
+  position:relative;
+  min-height:240px;
+  border:1px solid #303966;
+  border-radius:22px;
+  overflow:hidden;
+  background:#0d1125;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.game-card:hover{
+  transform:translateY(-7px);
+  border-color:#64e8ff;
+  box-shadow:
+    0 18px 45px #0008,
+    0 0 30px #64e8ff22;
+}
+
+.card-art{
+  height:150px;
+  position:relative;
+  background:var(--art);
+  overflow:hidden;
+}
+
+.card-art:before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:#fff2;
+  filter:blur(35px);
+  left:-60px;
+  top:-80px;
+}
+
+.card-gem{
+  position:absolute;
+  width:54px;
+  height:54px;
+  border-radius:13px;
+  transform:rotate(45deg);
+  background:linear-gradient(135deg,#fff,#66eaff 35%,#5362ff 75%);
+  box-shadow:0 0 30px #64e8ff;
+  top:44px;
+  left:calc(50% - 27px);
+}
+
+.card-gem:nth-child(2){
+  width:30px;
+  height:30px;
+  top:27px;
+  left:31%;
+  opacity:.7;
+}
+
+.card-gem:nth-child(3){
+  width:25px;
+  height:25px;
+  top:94px;
+  left:65%;
+  opacity:.6;
+}
+
+.card-info{
+  padding:15px 17px;
+}
+
+.card-info h3{
+  font-size:19px;
+}
+
+.card-info p{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* =========================
+   GAME
+========================= */
+
+.game{
+  display:none;
+  min-height:calc(100vh - 74px);
+  padding:25px 15px 50px;
+}
+
+.game.active{
+  display:block;
+}
+
+.game-wrap{
+  max-width:1000px;
+  margin:auto;
+}
+
+.back{
+  border:0;
+  background:none;
+  color:#aab4df;
+  cursor:pointer;
+  margin-bottom:15px;
+  font-size:14px;
+}
+
+.machine{
+  position:relative;
+  border-radius:30px;
+  padding:20px;
+  background:
+    linear-gradient(145deg,#1b2250,#0d1029 55%,#080a1d);
+  border:1px solid #47558f;
+  box-shadow:
+    0 30px 80px #0009,
+    inset 0 1px 0 #ffffff18;
+}
+
+.machine-title{
+  text-align:center;
+  margin-bottom:16px;
+}
+
+.machine-title small{
+  display:block;
+  color:#6e78a6;
+  font-size:11px;
+  letter-spacing:3px;
+}
+
+.machine-title h2{
+  font-size:clamp(25px,5vw,40px);
+  color:#fff;
+  text-shadow:
+    0 0 12px #64e8ff99,
+    0 0 30px #64e8ff44;
+}
+
+/* HUD */
+
+.hud{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.hud-box{
+  min-height:62px;
+  border-radius:15px;
+  border:1px solid #303965;
+  background:#090d20aa;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.hud-label{
+  color:#7883af;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+}
+
+.hud-value{
+  margin-top:4px;
+  font-size:20px;
+  font-weight:900;
+}
+
+.win-value{
+  color:var(--gold);
+  text-shadow:0 0 15px #ffd86b77;
+}
+
+/* =========================
+   BOARD
+========================= */
+
+.board-shell{
+  padding:13px;
+  border-radius:23px;
+  background:
+    linear-gradient(145deg,#252e60,#10142f);
+  border:1px solid #57659d;
+  box-shadow:
+    inset 0 0 30px #0007,
+    0 0 30px #64e8ff12;
+}
+
+.board{
+  width:min(650px,100%);
+  margin:auto;
+  aspect-ratio:5/3;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  grid-template-rows:repeat(3,1fr);
+  gap:8px;
+  position:relative;
+  overflow:hidden;
+  border-radius:17px;
+  padding:8px;
+  background:
+    radial-gradient(circle,#182052,#080b20 75%);
+}
+
+.cell{
+  position:relative;
+  min-width:0;
+  min-height:0;
+  border-radius:13px;
+  background:
+    linear-gradient(145deg,#171d3b,#0c1028);
+  border:1px solid #303b6d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:visible;
+}
+
+.cell:hover{
+  background:#1b2348;
+}
+
+.gem{
+  width:68%;
+  aspect-ratio:1;
+  position:relative;
+  border-radius:20%;
+  transform:rotate(45deg);
+  box-shadow:
+    0 0 15px var(--glow),
+    inset 3px 3px 8px #fff9,
+    inset -5px -5px 10px #0004;
+  transition:transform .18s,filter .18s;
+}
+
+.gem:before{
+  content:"";
+  position:absolute;
+  width:27%;
+  height:27%;
+  border-radius:50%;
+  background:#fff;
+  left:13%;
+  top:10%;
+  filter:blur(1px);
+  opacity:.8;
+}
+
+.gem:after{
+  content:"";
+  position:absolute;
+  width:35%;
+  height:15%;
+  border-radius:50%;
+  background:#fff;
+  left:32%;
+  top:74%;
+  opacity:.2;
+}
+
+.gem.blue{
+  --glow:#49dfff;
+  background:linear-gradient(135deg,#eaffff 0%,#65e8ff 25%,#2c74ff 70%,#2731a8);
+}
+
+.gem.pink{
+  --glow:#ff55d6;
+  background:linear-gradient(135deg,#fff 0%,#ff76df 25%,#d32a9d 65%,#76206f);
+}
+
+.gem.green{
+  --glow:#52ffb6;
+  background:linear-gradient(135deg,#effff8 0%,#4dffb3 28%,#12a979 68%,#096456);
+}
+
+.gem.red{
+  --glow:#ff596c;
+  background:linear-gradient(135deg,#fff 0%,#ff6979 25%,#e52d4e 65%,#831735);
+}
+
+.gem.gold{
+  --glow:#ffd45b;
+  background:linear-gradient(135deg,#fff 0%,#ffe78b 25%,#f4ad2f 65%,#a55a0e);
+}
+
+.gem.purple{
+  --glow:#ad6cff;
+  background:linear-gradient(135deg,#fff 0%,#c18aff 25%,#7439df 65%,#3e1e9a);
+}
+
+.gem.star{
+  clip-path:polygon(
+    50% 0%,
+    61% 35%,
+    98% 38%,
+    69% 59%,
+    79% 96%,
+    50% 74%,
+    21% 96%,
+    31% 59%,
+    2% 38%,
+    39% 35%
+  );
+  border-radius:0;
+  transform:rotate(0deg);
+}
+
+.gem.crown{
+  clip-path:polygon(
+    8% 20%,
+    29% 38%,
+    50% 8%,
+    71% 38%,
+    92% 20%,
+    82% 90%,
+    18% 90%
+  );
+  border-radius:0;
+  transform:rotate(0deg);
+}
+
+.cell.win .gem{
+  animation:
+    winPulse .28s ease-in-out infinite alternate,
+    winGlow .7s ease-in-out infinite;
+}
+
+@keyframes winPulse{
+  from{transform:rotate(45deg) scale(1)}
+  to{transform:rotate(45deg) scale(1.15)}
+}
+
+@keyframes winGlow{
+  50%{filter:brightness(1.8)}
+}
+
+.cell.removing .gem{
+  animation:explode .42s forwards;
+}
+
+@keyframes explode{
+  0%{
+    opacity:1;
+    transform:rotate(45deg) scale(1);
+  }
+  45%{
+    opacity:1;
+    transform:rotate(70deg) scale(1.35);
+  }
+  100%{
+    opacity:0;
+    transform:rotate(120deg) scale(.05);
+  }
+}
+
+.cell.falling .gem{
+  animation:fallIn .42s cubic-bezier(.2,.8,.25,1);
+}
+
+@keyframes fallIn{
+  0%{
+    transform:translateY(-150%) rotate(45deg);
+    opacity:0;
+  }
+  65%{
+    transform:translateY(12%) rotate(45deg);
+  }
+  100%{
+    transform:translateY(0) rotate(45deg);
+    opacity:1;
+  }
+}
+
+/* =========================
+   WIN MESSAGE
+========================= */
+
+.win-banner{
+  position:absolute;
+  z-index:20;
+  pointer-events:none;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) scale(.5);
+  opacity:0;
+  font-size:clamp(34px,8vw,76px);
+  font-weight:1000;
+  font-style:italic;
+  color:#fff;
+  text-shadow:
+    0 3px 0 #9b6400,
+    0 0 12px #ffd86b,
+    0 0 40px #ff9f00;
+  white-space:nowrap;
+}
+
+.win-banner.show{
+  animation:winText .85s cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+@keyframes winText{
+  0%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.45) rotate(-8deg);
+  }
+  25%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.15) rotate(3deg);
+  }
+  55%{
+    transform:translate(-50%,-50%) scale(1) rotate(0);
+  }
+  100%{
+    opacity:0;
+    transform:translate(-50%,-65%) scale(1.12);
+  }
+}
+
+/* =========================
+   PARTICLES
+========================= */
+
+.particle{
+  position:fixed;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:100;
+  background:#fff;
+  box-shadow:0 0 12px #fff;
+  animation:particleFly .8s ease-out forwards;
+}
+
+@keyframes particleFly{
+  0%{
+    transform:translate(0,0) scale(1);
+    opacity:1;
+  }
+  100%{
+    transform:translate(var(--x),var(--y)) scale(0);
+    opacity:0;
+  }
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+  margin-top:17px;
+  display:grid;
+  grid-template-columns:1fr 1.7fr 1fr;
+  gap:12px;
+}
+
+.control-btn{
+  min-height:54px;
+  border-radius:15px;
+  border:1px solid #3c477d;
+  background:#111631;
+  color:white;
+  font-size:15px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.control-btn:hover{
+  transform:translateY(-2px);
+  border-color:#64e8ff;
+  box-shadow:0 8px 22px #64e8ff18;
+}
+
+.spin-btn{
+  border-color:#7c63ff;
+  background:
+    linear-gradient(135deg,#644fff,#9b54ff 50%,#d34dca);
+  font-size:20px;
+  letter-spacing:1px;
+  box-shadow:
+    0 0 25px #7d5aff44,
+    inset 0 1px 0 #fff5;
+}
+
+.spin-btn:hover{
+  box-shadow:
+    0 0 35px #9a6aff77,
+    0 8px 25px #0008;
+}
+
+.spin-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none;
+}
+
+/* bet */
+
+.bet-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+  margin-top:14px;
+  color:#8c96bb;
+  font-size:13px;
+}
+
+.bet-btn{
+  width:32px;
+  height:32px;
+  border-radius:9px;
+  border:1px solid #384272;
+  background:#10152f;
+  color:white;
+  cursor:pointer;
+}
+
+.bet-number{
+  min-width:70px;
+  text-align:center;
+  font-weight:900;
+  color:#fff;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.info{
+  max-width:650px;
+  margin:17px auto 0;
+  text-align:center;
+  color:#6f79a5;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.cascade-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-top:7px;
+  padding:5px 10px;
+  border-radius:99px;
+  background:#211d46;
+  border:1px solid #4c3c8c;
+  color:#c9bcff;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#02030bcc;
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:200;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(520px,100%);
+  background:#11152e;
+  border:1px solid #465184;
+  border-radius:24px;
+  padding:25px;
+  box-shadow:0 30px 90px #000b;
+}
+
+.modal-box h2{
+  margin-bottom:15px;
+}
+
+.modal-box p{
+  color:#a6aed0;
+  line-height:1.8;
+  font-size:14px;
+}
+
+.close-modal{
+  width:100%;
+  margin-top:18px;
+  height:46px;
+  border:0;
+  border-radius:12px;
+  background:#252e59;
+  color:white;
+  cursor:pointer;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+  .game-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:600px){
+  .topbar{
+    height:62px;
+    padding:0 14px;
+  }
+
+  .logo{
+    font-size:17px;
+  }
+
+  .logo-icon{
+    width:32px;
+    height:32px;
+  }
+
+  .lobby{
+    padding:25px 12px 45px;
+  }
+
+  .game-grid{
+    grid-template-columns:1fr;
+  }
+
+  .game{
+    padding:15px 8px 40px;
+  }
+
+  .machine{
+    padding:12px;
+    border-radius:22px;
+  }
+
+  .hud{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hud-box{
+    min-height:54px;
+  }
+
+  .hud-value{
+    font-size:17px;
+  }
+
+  .board-shell{
+    padding:7px;
+  }
+
+  .board{
+    gap:4px;
+    padding:5px;
+    border-radius:13px;
+  }
+
+  .cell{
+    border-radius:8px;
+  }
+
+  .controls{
+    grid-template-columns:1fr;
+  }
+
+  .spin-btn{
+    order:-1;
+  }
+
+  .control-btn{
+    min-height:48px;
+  }
+}
+
+/* =========================
+   BACKGROUND STARS
+========================= */
+
+.stars{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-1;
+}
+
+.star-dot{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:#fff;
+  border-radius:50%;
+  opacity:.5;
+  animation:twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+  from{opacity:.15;transform:scale(.7)}
+  to{opacity:.8;transform:scale(1.5)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="app">
+
+<header class="topbar">
+  <div class="logo">
+    <div class="logo-icon"></div>
+    <div>CRYSTAL <span>KINGDOM</span></div>
+  </div>
+
+  <div class="top-actions">
+    <button class="icon-btn" onclick="openHowTo()">?</button>
+    <button class="icon-btn" onclick="toggleSound()" id="soundBtn">🔊</button>
+  </div>
+</header>
+
+<!-- =========================
+     LOBBY
+========================= -->
+
+<section class="lobby" id="lobby">
+
+  <div class="hero">
+    <h1>CRYSTAL KINGDOM</h1>
+    <p>Fantasy Match-3 • Cascade Demo</p>
+  </div>
+
+  <div class="game-grid">
+
+    <div class="game-card" onclick="startGame()">
+      <div class="card-art"
+           style="--art:radial-gradient(circle at 50% 20%,#375fff,#111742 65%,#090b1d)">
+        <div class="card-gem"></div>
+        <div class="card-gem"></div>
+        <div class="card-gem"></div>
+      </div>
+      <div class="card-info">
+        <h3>Crystal Kingdom</h3>
+        <p>Match • Break • Cascade</p>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="card-art"
+           style="--art:linear-gradient(135deg,#211436,#712e8d,#15102d)">
+        <div class="card-gem" style="background:linear-gradient(135deg,#fff,#d65aff,#6d23a5)"></div>
+        <div class="card-gem"></div>
+      </div>
+      <div class="card-info">
+        <h3>Moon Temple</h3>
+        <p>Coming Soon</p>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="card-art"
+           style="--art:linear-gradient(135deg,#062c29,#078765,#071923)">
+        <div class="card-gem" style="background:linear-gradient(135deg,#fff,#59ffbd,#07926c)"></div>
+        <div class="card-gem"></div>
+      </div>
+      <div class="card-info">
+        <h3>Emerald Wilds</h3>
+        <p>Coming Soon</p>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="card-art"
+           style="--art:linear-gradient(135deg,#41220c,#b65a0c,#25100a)">
+        <div class="card-gem" style="background:linear-gradient(135deg,#fff,#ffe06a,#e68a16)"></div>
+      </div>
+      <div class="card-info">
+        <h3>Solar Citadel</h3>
+        <p>Coming Soon</p>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="card-art"
+           style="--art:linear-gradient(135deg,#120d31,#432b99,#08091e)">
+        <div class="card-gem" style="background:linear-gradient(135deg,#fff,#ad6cff,#4c27bd)"></div>
+      </div>
+      <div class="card-info">
+        <h3>Abyss Vault</h3>
+        <p>Coming Soon</p>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="card-art"
+           style="--art:linear-gradient(135deg,#092c46,#177c91,#160d3e)">
+        <div class="card-gem" style="background:linear-gradient(135deg,#fff,#7ceaff,#7258ff)"></div>
+      </div>
+      <div class="card-info">
+        <h3>Aurora Palace</h3>
+        <p>Coming Soon</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =========================
+     GAME
+========================= -->
+
+<section class="game" id="game">
+
+  <div class="game-wrap">
+
+    <button class="back" onclick="backLobby()">← Back to Kingdom</button>
+
+    <div class="machine">
+
+      <div class="machine-title">
+        <small>MAGICAL CASCADE</small>
+        <h2>Crystal Kingdom</h2>
+      </div>
+
+      <div class="hud">
+
+        <div class="hud-box">
+          <div class="hud-label">Credits</div>
+          <div class="hud-value" id="credits">1000</div>
+        </div>
+
+        <div class="hud-box">
+          <div class="hud-label">Bet</div>
+          <div class="hud-value" id="betDisplay">10</div>
+        </div>
+
+        <div class="hud-box">
+          <div class="hud-label">Cascade</div>
+          <div class="hud-value" id="cascadeDisplay">0</div>
+        </div>
+
+        <div class="hud-box">
+          <div class="hud-label">Round Win</div>
+          <div class="hud-value win-value" id="winDisplay">0</div>
+        </div>
+
+      </div>
+
+      <div class="board-shell">
+
+        <div class="board" id="board">
+
+          <!-- cells generated by JS -->
+
+          <div class="win-banner" id="winBanner">WIN!</div>
+
+        </div>
+
+      </div>
+
+      <div class="controls">
+
+        <button class="control-btn" onclick="changeBet(-5)">BET −</button>
+
+        <button class="control-btn spin-btn"
+                id="spinBtn"
+                onclick="spin()">
+          SPIN
+        </button>
+
+        <button class="control-btn" onclick="changeBet(5)">BET +</button>
+
+      </div>
+
+      <div class="controls" style="grid-template-columns:1fr 1fr;margin-top:10px">
+
+        <button class="control-btn" onclick="toggleAuto()" id="autoBtn">
+          AUTO SPIN
+        </button>
+
+        <button class="control-btn" onclick="resetGame()">
+          RESET
+        </button>
+
+      </div>
+
+      <div class="bet-row">
+        <span>Bet:</span>
+        <button class="bet-btn" onclick="changeBet(-1)">−</button>
+        <div class="bet-number" id="betText">10</div>
+        <button class="bet-btn" onclick="changeBet(1)">+</button>
+      </div>
+
+      <div class="info">
+        จับคู่คริสตัล 3 ชิ้นขึ้นไปในแนวนอนหรือแนวตั้ง
+        <br>
+        เมื่อชนะ คริสตัลจะแตก → ตัวด้านบนตกลงมา → เติมตัวใหม่
+        <div class="cascade-badge">
+          CASCADE MULTIPLIER ACTIVE
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div class="modal" id="modal">
+
+  <div class="modal-box">
+
+    <h2>How to Play</h2>
+
+    <p>
+      จับคู่คริสตัลที่เหมือนกันอย่างน้อย 3 ชิ้น
+      ในแนวนอนหรือแนวตั้งเพื่อสร้าง Win
+      <br><br>
+      คริสตัลที่ชนะจะถูกทำลาย จากนั้นคริสตัลด้านบน
+      จะตกลงมา และสุ่มคริสตัลใหม่เข้ามาแทนที่
+      <br><br>
+      ระบบจะ Cascade ต่ออัตโนมัติจนกว่าจะไม่มีชุดที่ชนะ
+      <br><br>
+      <b>หมายเหตุ:</b> นี่เป็นเกมเดโม ใช้เครดิตจำลองเท่านั้น
+      ไม่มีเงินจริงหรือการเดิมพันจริง
+    </p>
+
+    <button class="close-modal" onclick="closeHowTo()">
+      CLOSE
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   CONFIG
+========================================== */
+
+const ROWS = 3;
+const COLS = 5;
+
+const TYPES = [
+  "blue",
+  "pink",
+  "green",
+  "red",
+  "gold",
+  "purple"
+];
+
+let board = [];
+
+let credits = 1000;
+let bet = 10;
+
+let cascade = 0;
+let roundWin = 0;
+
+let spinning = false;
+let autoSpin = false;
+
+let soundOn = true;
+
+let audioCtx = null;
+
+
+/* ==========================================
+   INIT
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  createStars();
+
+  createBoard();
+
+});
+
+
+/* ==========================================
+   STARS
+========================================== */
+
+function createStars(){
+
+  const stars = document.getElementById("stars");
+
+  for(let i=0;i<80;i++){
+
+    const s = document.createElement("div");
+
+    s.className = "star-dot";
+
+    s.style.left = Math.random()*100+"%";
+    s.style.top = Math.random()*100+"%";
+
+    s.style.animationDelay =
+      Math.random()*3+"s";
+
+    stars.appendChild(s);
+
+  }
+
+}
+
+
+/* ==========================================
+   RANDOM SYMBOL
+========================================== */
+
+function randomType(){
+
+  return TYPES[
+    Math.floor(Math.random()*TYPES.length)
+  ];
+
+}
+
+
+/* ==========================================
+   CREATE BOARD
+========================================== */
+
+function createBoard(){
+
+  board = [];
+
+  for(let r=0;r<ROWS;r++){
+
+    const row=[];
+
+    for(let c=0;c<COLS;c++){
+
+      row.push(randomType());
+
+    }
+
+    board.push(row);
+
+  }
+
+  /*
+    Make initial board playable.
+    We don't intentionally create
+    matches here.
+  */
+
+  while(findMatches().length){
+
+    for(let r=0;r<ROWS;r++){
+
+      for(let c=0;c<COLS;c++){
+
+        if(Math.random()<0.35){
+
+          board[r][c]=randomType();
+
+        }
+
+      }
+
+    }
+
+  }
+
+  renderBoard();
+
+}
+
+
+/* ==========================================
+   CELL HTML
+========================================== */
+
+function cellHTML(type){
+
+  let extra="";
+
+  if(type==="gold"){
+    extra=" star";
+  }
+
+  return `
+    <div class="gem ${type}${extra}"></div>
+  `;
+
+}
+
+
+/* ==========================================
+   RENDER BOARD
+========================================== */
+
+function renderBoard(falling=false){
+
+  const el = document.getElementById("board");
+
+  el.innerHTML="";
+
+  for(let r=0;r<ROWS;r++){
+
+    for(let c=0;c<COLS;c++){
+
+      const cell=document.createElement("div");
+
+      cell.className="cell";
+
+      if(falling){
+        cell.classList.add("falling");
+      }
+
+      cell.dataset.r=r;
+      cell.dataset.c=c;
+
+      cell.innerHTML=cellHTML(board[r][c]);
+
+      el.appendChild(cell);
+
+    }
+
+  }
+
+  const banner=document.createElement("div");
+
+  banner.className="win-banner";
+
+  banner.id="winBanner";
+
+  banner.textContent="WIN!";
+
+  el.appendChild(banner);
+
+}
+
+
+/* ==========================================
+   FIND MATCHES
+========================================== */
+
+function findMatches(){
+
+  const found = new Set();
+
+  /* horizontal */
+
+  for(let r=0;r<ROWS;r++){
+
+    let start=0;
+
+    while(start<COLS){
+
+      let end=start+1;
+
+      while(
+        end<COLS &&
+        board[r][end]===board[r][start]
+      ){
+        end++;
+      }
+
+      if(end-start>=3){
+
+        for(let c=start;c<end;c++){
+
+          found.add(`${r},${c}`);
+
+        }
+
+      }
+
+      start=end;
+
+    }
+
+  }
+
+
+  /* vertical */
+
+  for(let c=0;c<COLS;c++){
+
+    let start=0;
+
+    while(start<ROWS){
+
+      let end=start+1;
+
+      while(
+        end<ROWS &&
+        board[end][c]===board[start][c]
+      ){
+        end++;
+      }
+
+      if(end-start>=3){
+
+        for(let r=start;r<end;r++){
+
+          found.add(`${r},${c}`);
+
+        }
+
+      }
+
+      start=end;
+
+    }
+
+  }
+
+
+  return [...found].map(x=>{
+
+    const [r,c]=x.split(",").map(Number);
+
+    return {r,c};
+
+  });
+
+}
+
+
+/* ==========================================
+   SHOW MATCH
+========================================== */
+
+function highlightMatches(matches){
+
+  const cells =
+    document.querySelectorAll(".cell");
+
+  matches.forEach(({r,c})=>{
+
+    const index=r*COLS+c;
+
+    if(cells[index]){
+
+      cells[index].classList.add("win");
+
+    }
+
+  });
+
+}
+
+
+/* ==========================================
+   PARTICLES
+========================================== */
+
+function spawnParticles(x,y,count=16){
+
+  for(let i=0;i<count;i++){
+
+    const p=document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left=x+"px";
+    p.style.top=y+"px";
+
+    const angle=
+      Math.random()*Math.PI*2;
+
+    const distance=
+      35+Math.random()*100;
+
+    p.style.setProperty(
+      "--x",
+      Math.cos(angle)*distance+"px"
+    );
+
+    p.style.setProperty(
+      "--y",
+      Math.sin(angle)*distance+"px"
+    );
+
+    document.body.appendChild(p);
+
+    setTimeout(()=>{
+      p.remove();
+    },850);
+
+  }
+
+}
+
+
+/* ==========================================
+   MATCH PARTICLES
+========================================== */
+
+function createWinParticles(matches){
+
+  const cells =
+    document.querySelectorAll(".cell");
+
+  matches.forEach(({r,c})=>{
+
+    const index=r*COLS+c;
+
+    const cell=cells[index];
+
+    if(!cell) return;
+
+    const rect=cell.getBoundingClientRect();
+
+    spawnParticles(
+      rect.left+rect.width/2,
+      rect.top+rect.height/2,
+      9
+    );
+
+  });
+
+}
+
+
+/* ==========================================
+   WIN TEXT
+========================================== */
+
+function showWinText(text){
+
+  const banner =
+    document.getElementById("winBanner");
+
+  if(!banner) return;
+
+  banner.textContent=text;
+
+  banner.classList.remove("show");
+
+  void banner.offsetWidth;
+
+  banner.classList.add("show");
+
+}
+
+
+/* ==========================================
+   SOUND
+========================================== */
+
+function beep(freq=440,duration=.08){
+
+  if(!soundOn) return;
+
+  try{
+
+    if(!audioCtx){
+
+      audioCtx =
+        new (window.AudioContext ||
+        window.webkitAudioContext)();
+
+    }
+
+    const osc=
+      audioCtx.createOscillator();
+
+    const gain=
+      audioCtx.createGain();
+
+    osc.frequency.value=freq;
+
+    osc.type="sine";
+
+    gain.gain.setValueAtTime(
+      .04,
+      audioCtx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .001,
+      audioCtx.currentTime+duration
+    );
+
+    osc.connect(gain);
+
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+
+    osc.stop(
+      audioCtx.currentTime+duration
+    );
+
+  }catch(e){}
+
+}
+
+
+function winSound(){
+
+  beep(520,.08);
+
+  setTimeout(()=>beep(660,.08),80);
+
+  setTimeout(()=>beep(820,.12),160);
+
+}
+
+
+/* ==========================================
+   TOGGLE SOUND
+========================================== */
+
+function toggleSound(){
+
+  soundOn=!soundOn;
+
+  document.getElementById("soundBtn").textContent =
+    soundOn ? "🔊" : "🔇";
+
+}
+
+
+/* ==========================================
+   REMOVE MATCHES
+========================================== */
+
+async function removeMatches(matches){
+
+  highlightMatches(matches);
+
+  createWinParticles(matches);
+
+  winSound();
+
+  await wait(420);
+
+  const cells =
+    document.querySelectorAll(".cell");
+
+  matches.forEach(({r,c})=>{
+
+    const index=r*COLS+c;
+
+    if(cells[index]){
+
+      cells[index].classList.add("removing");
+
+    }
+
+  });
+
+  await wait(380);
+
+
+  matches.forEach(({r,c})=>{
+
+    board[r][c]=null;
+
+  });
+
+}
+
+
+/* ==========================================
+   COLLAPSE BOARD
+========================================== */
+
+async function collapseBoard(){
+
+  for(let c=0;c<COLS;c++){
+
+    const remaining=[];
+
+    for(let r=ROWS-1;r>=0;r--){
+
+      if(board[r][c]!==null){
+
+        remaining.push(board[r][c]);
+
+      }
+
+    }
+
+    while(remaining.length<ROWS){
+
+      remaining.push(randomType());
+
+    }
+
+    remaining.reverse();
+
+    for(let r=0;r<ROWS;r++){
+
+      board[r][c]=remaining[r];
+
+    }
+
+  }
+
+  renderBoard(true);
+
+  await wait(450);
+
+}
+
+
+/* ==========================================
+   PAYOUT
+========================================== */
+
+function calculateWin(matchCount){
+
+  /*
+    Cascade reward gets smaller each round.
+  */
+
+  const base =
+    matchCount * bet * 2;
+
+  const multiplier =
+    Math.max(
+      0.28,
+      1 - (cascade-1)*0.12
+    );
+
+  return Math.floor(
+    base*multiplier
+  );
+
+}
+
+
+/* ==========================================
+   CASCADE ROUND
+========================================== */
+
+async function cascadeRound(){
+
+  const matches=findMatches();
+
+  if(matches.length===0){
+
+    return false;
+
+  }
+
+  cascade++;
+
+  document.getElementById("cascadeDisplay")
+    .textContent=cascade;
+
+  const win=calculateWin(matches.length);
+
+  roundWin+=win;
+
+  credits+=win;
+
+  document.getElementById("credits")
+    .textContent=credits;
+
+  document.getElementById("winDisplay")
+    .textContent=roundWin;
+
+  showWinText(
+    cascade===1
+      ? `WIN +${win}`
+      : `CASCADE x${cascade} +${win}`
+  );
+
+  await removeMatches(matches);
+
+  await collapseBoard();
+
+  return true;
+
+}
+
+
+/* ==========================================
+   FULL CASCADE
+========================================== */
+
+async function runCascade(){
+
+  let safety=0;
+
+  while(safety<15){
+
+    const happened=
+      await cascadeRound();
+
+    if(!happened) break;
+
+    safety++;
+
+  }
+
+}
+
+
+/* ==========================================
+   SPIN
+========================================== */
+
+async function spin(){
+
+  if(spinning) return;
+
+  if(credits<bet){
+
+    alert("เครดิตไม่พอครับ");
+
+    return;
+
+  }
+
+  spinning=true;
+
+  autoSpin=false;
+
+  document.getElementById("autoBtn")
+    .textContent="AUTO SPIN";
+
+  const btn=
+    document.getElementById("spinBtn");
+
+  btn.disabled=true;
+
+  credits-=bet;
+
+  roundWin=0;
+
+  cascade=0;
+
+  updateHUD();
+
+
+  /* reel roll animation */
+
+  await reelAnimation();
+
+
+  /*
+    Guarantee a possible match sometimes
+    so the demo feels active.
+  */
+
+  createGuaranteedMatch();
+
+  renderBoard();
+
+
+  await wait(180);
+
+  await runCascade();
+
+
+  document.getElementById("winDisplay")
+    .textContent=roundWin;
+
+  spinning=false;
+
+  btn.disabled=false;
+
+
+  if(autoSpin){
+
+    setTimeout(spin,650);
+
+  }
+
+}
+
+
+/* ==========================================
+   REEL ANIMATION
+========================================== */
+
+async function reelAnimation(){
+
+  const boardEl=
+    document.getElementById("board");
+
+  boardEl.style.filter=
+    "brightness(.7)";
+
+  for(let i=0;i<3;i++){
+
+    for(let j=0;j<5;j++){
+
+      board[j%ROWS][i]=randomType();
+
+    }
+
+    renderBoard();
+
+    await wait(90);
+
+  }
+
+  boardEl.style.filter="";
+
+}
+
+
+/* ==========================================
+   GUARANTEED MATCH
+========================================== */
+
+function createGuaranteedMatch(){
+
+  /*
+    Around 75% of spins produce a match.
+  */
+
+  if(Math.random()>0.75) return;
+
+  const type=randomType();
+
+  const row=
+    Math.floor(Math.random()*ROWS);
+
+  const start=
+    Math.floor(Math.random()*(COLS-2));
+
+  board[row][start]=type;
+  board[row][start+1]=type;
+  board[row][start+2]=type;
+
+}
+
+
+/* ==========================================
+   WAIT
+========================================== */
+
+function wait(ms){
+
+  return new Promise(
+    resolve=>setTimeout(resolve,ms)
+  );
+
+}
+
+
+/* ==========================================
+   HUD
+========================================== */
+
+function updateHUD(){
+
+  document.getElementById("credits")
+    .textContent=credits;
+
+  document.getElementById("betDisplay")
+    .textContent=bet;
+
+  document.getElementById("betText")
+    .textContent=bet;
+
+  document.getElementById("cascadeDisplay")
+    .textContent=cascade;
+
+  document.getElementById("winDisplay")
+    .textContent=roundWin;
+
+}
+
+
+/* ==========================================
+   BET
+========================================== */
+
+function changeBet(amount){
+
+  if(spinning) return;
+
+  bet+=amount;
+
+  if(bet<5) bet=5;
+
+  if(bet>100) bet=100;
+
+  updateHUD();
+
+}
+
+
+/* ==========================================
+   AUTO
+========================================== */
+
+function toggleAuto(){
+
+  if(spinning){
+
+    autoSpin=false;
+
+    document.getElementById("autoBtn")
+      .textContent="AUTO SPIN";
+
+    return;
+
+  }
+
+  autoSpin=!autoSpin;
+
+  document.getElementById("autoBtn")
+    .textContent=
+      autoSpin ? "STOP AUTO" : "AUTO SPIN";
+
+  if(autoSpin){
+
+    spin();
+
+  }
+
+}
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+function resetGame(){
+
+  if(spinning) return;
+
+  credits=1000;
+
+  bet=10;
+
+  cascade=0;
+
+  roundWin=0;
+
+  autoSpin=false;
+
+  document.getElementById("autoBtn")
+    .textContent="AUTO SPIN";
+
+  createBoard();
+
+  updateHUD();
+
+}
+
+
+/* ==========================================
+   LOBBY / GAME
+========================================== */
+
+function startGame(){
+
+  document.getElementById("lobby")
+    .style.display="none";
+
+  document.getElementById("game")
+    .classList.add("active");
+
+  createBoard();
+
+  updateHUD();
+
+}
+
+
+function backLobby(){
+
+  if(spinning) return;
+
+  autoSpin=false;
+
+  document.getElementById("game")
+    .classList.remove("active");
+
+  document.getElementById("lobby")
+    .style.display="block";
+
+}
+
+
+/* ==========================================
+   HOW TO
+========================================== */
+
+function openHowTo(){
+
+  document.getElementById("modal")
+    .classList.add("show");
+
+}
+
+
+function closeHowTo(){
+
+  document.getElementById("modal")
+    .classList.remove("show");
+
+}
+
+
+/* ==========================================
+   KEYBOARD
+========================================== */
+
+document.addEventListener("keydown",e=>{
+
+  if(e.code==="Space"){
+
+    e.preventDefault();
+
+    if(
+      document.getElementById("game")
+        .classList.contains("active")
+    ){
+
+      spin();
+
+    }
+
+  }
+
+});
+
+
+/* ==========================================
+   CLICK OUTSIDE MODAL
+========================================== */
+
+document.getElementById("modal")
+  .addEventListener("click",e=>{
+
+    if(e.target.id==="modal"){
+
+      closeHowTo();
+
+    }
+
+  });
+
+</script>
+
+</body>
+</html>
